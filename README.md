@@ -7,7 +7,7 @@
 Real ATV footage, re-rendered as golden hour, night rain, autumn, blizzard and more.<br>
 The trail, the vehicle motion and the camera path stay those of the original recording.
 
-[Interactive replay](https://paint-the-trail.pages.dev/replay/) · [Blog preview](https://paint-the-trail.pages.dev/) · [How to run](#how-to-run)
+[Interactive replay](https://paint-the-trail.pages.dev/replay/) · [Blog preview](https://paint-the-trail.pages.dev/) · [Getting started](#getting-started)
 
 <img src="docs/media/hero.gif" width="720" alt="One real 5.8 s drive followed by Cosmos Transfer 2.5 outputs for golden hour, night rain, autumn, blue hour, blizzard and rain">
 
@@ -17,7 +17,7 @@ The trail, the vehicle motion and the camera path stay those of the original rec
 |:---:|:---:|:---:|:---:|
 | clips succeeded on the first attempt | full run on 8 A100s | generation speedup, 8 GPUs vs 1 | 8 drives in the live Ray Serve app |
 
-## What it does
+## Overview
 
 Off-road perception models need night rain, snow and smoke, and those conditions are scarce in recorded data.
 This pipeline takes real clips from [TartanDrive 2.0](https://theairlab.org/TartanDrive2) (CMU AirLab, CC BY 4.0),
@@ -40,35 +40,24 @@ light, weather, season and surface.
   <br><sub>The same night rain prompt on nine drives. Headlight falloff and wet ground follow each trail's layout.</sub>
 </p>
 
-## How Ray runs it
+## Architecture
 
-```mermaid
-flowchart LR
-  A[TartanDrive 2.0<br>raw drives] --> B[Ray Data<br>clip prep + edge maps<br>CPU]
-  B --> C[(clip catalog<br>parquet)]
-  C --> D[Scheduler<br>ray.wait, retries, resume]
-  D --> E1[CosmosActor GPU 0]
-  D --> E2[CosmosActor GPU 1]
-  D --> E3[... GPU 7]
-  E1 & E2 & E3 --> F[(validated outputs<br>ffprobe checked)]
-  F --> G[Ray Data<br>quality metrics + VLM judge]
-  E1 & E2 & E3 -.same actors.-> H[Ray Serve<br>live app]
-```
+<p align="center"><img src="docs/media/architecture.svg" width="100%" alt="Architecture: Ray Data clip preparation, clip catalog, ray.wait scheduler, eight persistent CosmosActor GPU workers, validated outputs and Ray Data scoring; Ray Serve PaintAPI and multiplexed Painter replicas reuse the same actor class"></p>
 
-| Layer | Ray piece | What it does |
+| Stage | Ray component | Responsibility |
 |---|---|---|
 | Clip prep | **Ray Data** | Decode, resample 10 Hz to 16 fps, encode, verify, precompute lossless edge controls on worker CPUs |
 | Generation | **Ray Core actors** | One persistent actor per GPU owns a long-lived Cosmos child process (own torch/CUDA stack); the 2B model loads once |
 | Scheduling | **`ray.wait`** | One request in flight per actor, infra retries on a replacement actor, per-request records for resume |
 | Scoring | **Ray Data** | Edge F1 vs source, CIELAB chroma, frozen-frame checks, blind Cosmos-Reason1 judge |
-| Live demo | **Ray Serve** | Same actors behind FastAPI; `@serve.multiplexed` routes a scene to the replica that already cached its latents |
+| Interactive application | **Ray Serve** | Same actors behind FastAPI; `@serve.multiplexed` routes a scene to the replica that already cached its latents |
 
 <p align="center">
-  <img src="docs/media/serve_app.gif" width="720" alt="Screen recording of the Ray Serve app: pick a drive, pick a condition, paint 8 drives on 8 GPUs">
-  <br><sub>The live Ray Serve app: pick a drive and a condition, then paint 8 drives on 8 GPUs (sped up).</sub>
+  <img src="docs/media/serve_app.gif" width="720" alt="Screen recording of the Ray Serve application generating 8 drives on 8 GPUs">
+  <br><sub>Interactive Ray Serve application: a drive and condition are selected, then 8 drives are generated in parallel on 8 GPUs (playback accelerated).</sub>
 </p>
 
-## Results at a glance
+## Results
 
 | Actors (1x A100 each) | Wall time | Generation speedup | Median per request |
 |---:|---:|---:|---:|
@@ -81,37 +70,37 @@ Denoising (4 steps, distilled edge model) is 79% of each 80 s request, so throug
 All reported results use the Cosmos guardrails (text and video). Full numbers: [`docs/blog/blog.md`](docs/blog/blog.md),
 static report: `results/report/index.html`.
 
-## How to run
+## Getting started
 
 **Requirements:** a Ray 2.60 cluster with NVIDIA GPUs (80 GB class: A100, H100, B200), shared storage at
 `/mnt/cluster_storage`, a Hugging Face account with access to `nvidia/Cosmos-Transfer2.5-2B` and `nvidia/Cosmos-Guardrail1`.
 
 ```bash
-# 1. Image (Anyscale-builder compatible) and environments
+# 1. Container image and environments
 docker build -t offroad-cosmos environments/            # or use environments/Dockerfile as an Anyscale image
 UV_CACHE_DIR=/tmp/uv-cache bash environments/build_cosmos_env.sh   # isolated Cosmos 2.5 env on shared storage
 uv venv --system-site-packages .venv && uv pip install -e '.[test]'
 hf auth login
 
-# 2. Check the cluster and stage checkpoints
+# 2. Cluster validation and checkpoint staging
 .venv/bin/python -m offroad_ray.cli preflight
 .venv/bin/python -m offroad_ray.cli env-check configs/pilot.yaml
 .venv/bin/python jobs/stage_checkpoints.py
 
-# 3. Data: download TartanDrive drives and prepare clips (Ray Data, CPU)
+# 3. Data acquisition and clip preparation (Ray Data, CPU)
 .venv/bin/python -m offroad_ray.cli fetch   configs/pilot.yaml
 .venv/bin/python -m offroad_ray.cli prepare configs/pilot.yaml
 
-# 4. Generate on all GPUs (resumable), then score
+# 4. Generation on all GPUs (resumable) and quality review
 .venv/bin/python -m offroad_ray.cli generate configs/pilot.yaml --actors 8
 .venv/bin/python -m offroad_ray.cli review   configs/pilot.yaml
 
-# 5. Scale up, benchmark, report
+# 5. Full run, scaling benchmark and report
 .venv/bin/python -m offroad_ray.cli generate  configs/main.yaml
 .venv/bin/python -m offroad_ray.cli benchmark configs/benchmark.yaml --actors 1 2 4 8
 .venv/bin/python -m offroad_ray.cli report
 
-# 6. Live app on Ray Serve
+# 6. Interactive application on Ray Serve
 .venv/bin/python jobs/serve_demo.py up --replicas 8 --guardrails
 .venv/bin/python jobs/serve_demo.py down
 ```
@@ -136,13 +125,13 @@ templates/     Anyscale template version (notebooks, Serve app, CPU replay)
 docs/          blog draft, media
 ```
 
-## In progress
+## Ongoing work
 
 - **Depth control vs edge control** on B200s: the non-distilled depth model (35 steps) took 868 s per clip on an A100
   against 80 s for distilled edge.
 - **Cosmos 3** transfer comparison on the same clips, prompts and seeds.
 
-## Credits
+## Acknowledgments
 
 Alicia Chua, Alexandr Plashchinsky, Nickhil Gupta, Abhishek Sriram, Abhishek Monangi, Omar Shorbaji.
 
