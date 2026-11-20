@@ -6,9 +6,12 @@
 
 Real ATV footage, re-rendered as golden hour, night rain, autumn, blizzard and more.<br>
 The trail, the vehicle motion and the camera path stay those of the original recording. 
-Note: The animations in this README are compressed and downscaled to meet GitHub's image size limits, so they look softer than the actual outputs. For full-resolution results, open the replay or the blog preview.
 
 [Interactive replay](https://paint-the-trail.pages.dev/replay/) · [Blog preview](https://paint-the-trail.pages.dev/) · [Getting started](#getting-started)
+
+### Note
+The animations in this README are compressed and downscaled to meet GitHub's image size limits, so they look softer than the actual outputs. For full-resolution results, open the replay or the blog preview.
+
 
 <img src="docs/media/hero.gif" width="720" alt="One real 5.8 s drive followed by Cosmos Transfer 2.5 outputs for golden hour, night rain, autumn, blue hour, blizzard and rain">
 
