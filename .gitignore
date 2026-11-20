@@ -27,3 +27,6 @@ docs/blog/assets/
 *.token
 token
 .cloudflare_token
+
+# README media (small, compressed; allowed)
+!docs/media/*.gif
