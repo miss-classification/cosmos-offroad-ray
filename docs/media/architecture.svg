@@ -1,127 +1,107 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 500" width="1280" height="500" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 600" width="1280" height="600" font-family="Helvetica, Arial, 'Segoe UI', sans-serif">
   <defs>
-    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#000"/>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#111"/>
     </marker>
     <style>
-      .box { fill:#fff; stroke:#000; stroke-width:1.6; }
-      .ray { fill:#000; }
-      .h { font-size:15px; font-weight:700; fill:#000; }
-      .tag { font-size:10.5px; font-weight:700; letter-spacing:.08em; fill:#fff; }
-      .t { font-size:12.5px; fill:#222; }
-      .m { font-size:12px; fill:#222; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-      .lane { font-size:11px; font-weight:700; letter-spacing:.14em; fill:#000; }
-      .edge { stroke:#000; stroke-width:1.6; fill:none; }
-      .dash { stroke:#000; stroke-width:1.4; fill:none; stroke-dasharray:5 4; }
-      .lbl { font-size:11px; fill:#444; font-style:italic; }
+      .box  { fill:#fff; stroke:#111; stroke-width:2; }
+      .tag  { fill:#1f5fd6; }
+      .tagt { font-size:12px; font-weight:700; letter-spacing:.06em; fill:#fff; }
+      .h    { font-size:17px; font-weight:700; fill:#111; }
+      .t    { font-size:14px; fill:#333; }
+      .c    { font-size:14px; fill:#333; font-family: Menlo, Consolas, 'Courier New', monospace; }
+      .lane { font-size:13px; font-weight:700; letter-spacing:.12em; fill:#111; }
+      .e    { stroke:#111; stroke-width:2; fill:none; }
+      .d    { stroke:#111; stroke-width:2; fill:none; stroke-dasharray:6 5; }
     </style>
   </defs>
 
-  <rect width="1280" height="500" fill="#fff"/>
+  <rect width="1280" height="600" fill="#fff"/>
+
+  <!-- title -->
+  <text x="640" y="48" text-anchor="middle" font-size="26" font-weight="700" fill="#111">Off-Road Video Augmentation on Ray</text>
+  <text x="640" y="76" text-anchor="middle" font-size="15" fill="#444">Ray Data · Ray Core · Ray Serve · NVIDIA Cosmos Transfer 2.5</text>
 
   <!-- lanes -->
-  <text class="lane" x="30" y="44">BATCH PIPELINE</text>
-  <line x1="30" y1="285" x2="1050" y2="285" stroke="#000" stroke-width="1" stroke-dasharray="2 4"/>
-  <text class="lane" x="30" y="318">LIVE APP</text>
+  <text class="lane" x="24" y="122">BATCH PIPELINE</text>
+  <text class="lane" x="24" y="392">INTERACTIVE APPLICATION</text>
+  <line x1="24" y1="362" x2="1040" y2="362" stroke="#bbb" stroke-width="1.5"/>
 
-  <!-- 1 source -->
-  <rect class="box" x="30" y="80" width="140" height="140" rx="6"/>
-  <text class="h" x="44" y="108" style="font-size:14px">TartanDrive 2.0</text>
-  <text class="t" x="44" y="134">9 real ATV drives</text>
-  <text class="t" x="44" y="154">10 Hz camera</text>
-  <text class="t" x="44" y="174">CMU AirLab</text>
-  <text class="t" x="44" y="194">CC BY 4.0</text>
+  <!-- row 1 -->
+  <rect class="box" x="24" y="140" width="164" height="130" rx="8"/>
+  <text class="h" x="106" y="192" text-anchor="middle">TartanDrive 2.0</text>
+  <text class="t" x="106" y="218" text-anchor="middle">9 real ATV drives</text>
+  <text class="t" x="106" y="240" text-anchor="middle">CC BY 4.0</text>
 
-  <!-- 2 ray data prep -->
-  <rect class="box" x="205" y="80" width="200" height="140" rx="6"/>
-  <rect class="ray" x="205" y="80" width="200" height="22" rx="6"/><rect class="ray" x="205" y="92" width="200" height="10"/>
-  <text class="tag" x="217" y="95">RAY DATA · CPU</text>
-  <text class="h" x="217" y="126">Clip preparation</text>
-  <text class="t" x="217" y="150">decode, resample to 16 fps</text>
-  <text class="t" x="217" y="170">encode + verify by decode</text>
-  <text class="t" x="217" y="190">Canny edge control, lossless</text>
-  <text class="t" x="217" y="210">cached by settings hash</text>
+  <rect class="box" x="214" y="140" width="190" height="130" rx="8"/>
+  <path class="tag" d="M222,140 h174 a8,8 0 0 1 8,8 v20 h-190 v-20 a8,8 0 0 1 8,-8 z"/>
+  <text class="tagt" x="309" y="159" text-anchor="middle">RAY DATA</text>
+  <text class="h" x="309" y="202" text-anchor="middle">Clip preparation</text>
+  <text class="t" x="309" y="228" text-anchor="middle">resample to 16 fps</text>
+  <text class="t" x="309" y="250" text-anchor="middle">edge maps, cached</text>
 
-  <!-- 3 catalog (cylinder) -->
-  <path class="box" d="M440,92 a70,12 0 0,1 140,0 v116 a70,12 0 0,1 -140,0 z"/>
-  <path class="edge" d="M440,92 a70,12 0 0,0 140,0"/>
-  <text class="h" x="510" y="132" text-anchor="middle">Clip catalog</text>
-  <text class="t" x="510" y="156" text-anchor="middle">parquet</text>
-  <text class="t" x="510" y="174" text-anchor="middle">93 frames, 16 fps</text>
-  <text class="t" x="510" y="192" text-anchor="middle">clip + edge map</text>
+  <path class="box" d="M438,154 a75,13 0 0,1 150,0 v102 a75,13 0 0,1 -150,0 z"/>
+  <path class="e" d="M438,154 a75,13 0 0,0 150,0"/>
+  <text class="h" x="513" y="208" text-anchor="middle">Clip catalog</text>
+  <text class="t" x="513" y="234" text-anchor="middle">clip + edge map</text>
 
-  <!-- 4 scheduler -->
-  <rect class="box" x="615" y="80" width="180" height="140" rx="6"/>
-  <rect class="ray" x="615" y="80" width="180" height="22" rx="6"/><rect class="ray" x="615" y="92" width="180" height="10"/>
-  <text class="tag" x="627" y="95">RAY CORE · DRIVER</text>
-  <text class="h" x="627" y="126">Scheduler</text>
-  <text class="m" x="627" y="150">ray.wait</text>
-  <text class="t" x="627" y="170">1 request per actor</text>
-  <text class="t" x="627" y="190">retry on a new actor</text>
-  <text class="t" x="627" y="210">resume from records</text>
+  <rect class="box" x="622" y="140" width="180" height="130" rx="8"/>
+  <path class="tag" d="M630,140 h164 a8,8 0 0 1 8,8 v20 h-180 v-20 a8,8 0 0 1 8,-8 z"/>
+  <text class="tagt" x="712" y="159" text-anchor="middle">RAY CORE</text>
+  <text class="h" x="712" y="202" text-anchor="middle">Scheduler</text>
+  <text class="c" x="712" y="228" text-anchor="middle">ray.wait</text>
+  <text class="t" x="712" y="250" text-anchor="middle">retry and resume</text>
 
-  <!-- 5 GPU actors (stacked cards) -->
-  <rect class="box" x="846" y="64" width="200" height="140" rx="6"/>
-  <rect class="box" x="838" y="72" width="200" height="140" rx="6"/>
-  <rect class="box" x="830" y="80" width="200" height="140" rx="6"/>
-  <rect class="ray" x="830" y="80" width="200" height="22" rx="6"/><rect class="ray" x="830" y="92" width="200" height="10"/>
-  <text class="tag" x="842" y="95">RAY CORE · 8 × GPU</text>
-  <text class="h" x="842" y="126">CosmosActor × 8</text>
-  <text class="t" x="842" y="150">1 GPU each, persistent</text>
-  <text class="t" x="842" y="170">Cosmos 2.5 child process</text>
-  <text class="t" x="842" y="190">own torch / CUDA stack</text>
-  <text class="t" x="842" y="210">model loads once</text>
+  <rect class="box" x="852" y="128" width="190" height="130" rx="8"/>
+  <rect class="box" x="844" y="134" width="190" height="130" rx="8"/>
+  <rect class="box" x="836" y="140" width="190" height="130" rx="8"/>
+  <path class="tag" d="M844,140 h174 a8,8 0 0 1 8,8 v20 h-190 v-20 a8,8 0 0 1 8,-8 z"/>
+  <text class="tagt" x="931" y="159" text-anchor="middle">RAY CORE</text>
+  <text class="h" x="931" y="202" text-anchor="middle">CosmosActor × 8</text>
+  <text class="t" x="931" y="228" text-anchor="middle">1 GPU each</text>
+  <text class="t" x="931" y="250" text-anchor="middle">model loaded once</text>
 
-  <!-- 6 outputs -->
-  <rect class="box" x="1080" y="80" width="170" height="140" rx="6"/>
-  <text class="h" x="1094" y="108">Outputs</text>
-  <text class="t" x="1094" y="134">288 / 288 first try</text>
-  <text class="t" x="1094" y="154">ffprobe-validated</text>
-  <text class="t" x="1094" y="174">guardrails on</text>
-  <text class="t" x="1094" y="194">per-request records</text>
+  <rect class="box" x="1080" y="140" width="170" height="130" rx="8"/>
+  <text class="h" x="1165" y="192" text-anchor="middle">Outputs</text>
+  <text class="t" x="1165" y="218" text-anchor="middle">validated MP4s</text>
+  <text class="t" x="1165" y="240" text-anchor="middle">guardrails on</text>
 
-  <!-- 7 scoring -->
-  <rect class="box" x="1080" y="335" width="170" height="135" rx="6"/>
-  <rect class="ray" x="1080" y="335" width="170" height="22" rx="6"/><rect class="ray" x="1080" y="347" width="170" height="10"/>
-  <text class="tag" x="1092" y="350">RAY DATA</text>
-  <text class="h" x="1092" y="380">Scoring + report</text>
-  <text class="t" x="1092" y="402">edge F1 vs source</text>
-  <text class="t" x="1092" y="420">CIELAB chroma</text>
-  <text class="t" x="1092" y="438">frozen-frame checks</text>
-  <text class="t" x="1092" y="456">blind VLM judge</text>
+  <!-- scoring (batch, under outputs) -->
+  <rect class="box" x="1080" y="420" width="170" height="130" rx="8"/>
+  <path class="tag" d="M1088,420 h154 a8,8 0 0 1 8,8 v20 h-170 v-20 a8,8 0 0 1 8,-8 z"/>
+  <text class="tagt" x="1165" y="439" text-anchor="middle">RAY DATA</text>
+  <text class="h" x="1165" y="482" text-anchor="middle">Quality scoring</text>
+  <text class="t" x="1165" y="508" text-anchor="middle">edge F1, chroma</text>
+  <text class="t" x="1165" y="530" text-anchor="middle">VLM judge</text>
 
-  <!-- live lane -->
-  <rect class="box" x="30" y="345" width="140" height="110" rx="6"/>
-  <text class="h" x="44" y="373">Browser</text>
-  <text class="t" x="44" y="397">pick a drive</text>
-  <text class="t" x="44" y="417">describe weather</text>
-  <text class="t" x="44" y="437">compare slider</text>
+  <!-- row 2: interactive -->
+  <rect class="box" x="24" y="420" width="164" height="130" rx="8"/>
+  <text class="h" x="106" y="472" text-anchor="middle">Browser</text>
+  <text class="t" x="106" y="498" text-anchor="middle">drive + weather</text>
+  <text class="t" x="106" y="520" text-anchor="middle">prompt</text>
 
-  <rect class="box" x="205" y="345" width="590" height="110" rx="6"/>
-  <rect class="ray" x="205" y="345" width="590" height="22" rx="6"/><rect class="ray" x="205" y="357" width="590" height="10"/>
-  <text class="tag" x="217" y="360">RAY SERVE · INGRESS</text>
-  <text class="h" x="217" y="391">PaintAPI</text>
-  <text class="t" x="217" y="415">FastAPI: UI, job API, progress per GPU, shared gallery (repeat prompt returns instantly)</text>
-  <text class="t" x="217" y="437">routes each request by scene id</text>
+  <rect class="box" x="214" y="420" width="588" height="130" rx="8"/>
+  <path class="tag" d="M222,420 h572 a8,8 0 0 1 8,8 v20 h-588 v-20 a8,8 0 0 1 8,-8 z"/>
+  <text class="tagt" x="508" y="439" text-anchor="middle">RAY SERVE</text>
+  <text class="h" x="508" y="482" text-anchor="middle">PaintAPI</text>
+  <text class="t" x="508" y="508" text-anchor="middle">FastAPI ingress, job status per GPU</text>
+  <text class="t" x="508" y="530" text-anchor="middle">routes each request by scene</text>
 
-  <rect class="box" x="830" y="345" width="200" height="110" rx="6"/>
-  <rect class="ray" x="830" y="345" width="200" height="22" rx="6"/><rect class="ray" x="830" y="357" width="200" height="10"/>
-  <text class="tag" x="842" y="360">RAY SERVE · 8 REPLICAS</text>
-  <text class="h" x="842" y="391">Painter</text>
-  <text class="m" x="842" y="415">@serve.multiplexed</text>
-  <text class="t" x="842" y="437">per-replica latent cache</text>
+  <rect class="box" x="836" y="420" width="190" height="130" rx="8"/>
+  <path class="tag" d="M844,420 h174 a8,8 0 0 1 8,8 v20 h-190 v-20 a8,8 0 0 1 8,-8 z"/>
+  <text class="tagt" x="931" y="439" text-anchor="middle">RAY SERVE</text>
+  <text class="h" x="931" y="482" text-anchor="middle">Painter × 8</text>
+  <text class="c" x="931" y="508" text-anchor="middle">@serve.multiplexed</text>
+  <text class="t" x="931" y="530" text-anchor="middle">reuses CosmosActor</text>
 
-  <!-- edges: batch -->
-  <path class="edge" d="M170,150 H203" marker-end="url(#a)"/>
-  <path class="edge" d="M405,150 H438" marker-end="url(#a)"/>
-  <path class="edge" d="M580,150 H613" marker-end="url(#a)"/>
-  <path class="edge" d="M795,150 H828" marker-end="url(#a)"/>
-  <path class="edge" d="M1046,150 H1078" marker-end="url(#a)"/>
-  <path class="edge" d="M1165,220 V333" marker-end="url(#a)"/>
-  <!-- edges: live -->
-  <path class="edge" d="M170,400 H203" marker-end="url(#a)"/>
-  <path class="edge" d="M795,400 H828" marker-end="url(#a)"/>
-  <path class="dash" d="M930,343 V222" marker-end="url(#a)"/>
-  <text class="lbl" x="940" y="250">same CosmosActor class,</text>
-  <text class="lbl" x="940" y="264">one per GPU</text>
+  <!-- arrows -->
+  <path class="e" d="M188,205 H212" marker-end="url(#a)"/>
+  <path class="e" d="M404,205 H436" marker-end="url(#a)"/>
+  <path class="e" d="M588,205 H620" marker-end="url(#a)"/>
+  <path class="e" d="M802,205 H834" marker-end="url(#a)"/>
+  <path class="e" d="M1042,205 H1078" marker-end="url(#a)"/>
+  <path class="e" d="M1165,270 V418" marker-end="url(#a)"/>
+  <path class="e" d="M188,485 H212" marker-end="url(#a)"/>
+  <path class="e" d="M802,485 H834" marker-end="url(#a)"/>
+  <path class="d" d="M931,418 V274" marker-end="url(#a)"/>
 </svg>
