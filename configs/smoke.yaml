@@ -1,0 +1,19 @@
+# SMOKE TEST ONLY. Guardrails OFF. Outputs are labelled smoke and are never evaluated or reported.
+# Same first clip, first condition (fog), seeds 101 and 202 (use with --actors 1 --limit 2).
+name: smoke
+dataset:
+  runs:
+    - meadows_2023-09-14-12-07-28
+  max_download_gb: 10
+clips:
+  clips_per_run: 3
+max_clips: 1
+generation:
+  conditions_file: conditions.yaml
+  seeds: [101, 202]
+  control_weights: [1.0]
+  guardrails: false
+scheduler:
+  num_actors: 1
+budget:
+  max_generation_attempts: 500

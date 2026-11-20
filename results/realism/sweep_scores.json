@@ -1,0 +1,35 @@
+{
+ "scores": {
+  "pilot": {
+   "n": 12,
+   "photorealism": 4.5,
+   "physical_plausibility": 4.636,
+   "condition_intensity": 4.0,
+   "temporal_stability": 4.364,
+   "condition_match": 0.417,
+   "quality": 4.379
+  },
+  "realism_a": {
+   "n": 10,
+   "photorealism": 4.5,
+   "physical_plausibility": 4.5,
+   "condition_intensity": 3.9,
+   "temporal_stability": 4.7,
+   "condition_match": 0.6,
+   "quality": 4.3
+  },
+  "realism_b": {
+   "n": 12,
+   "photorealism": 4.364,
+   "physical_plausibility": 4.545,
+   "condition_intensity": 4.0,
+   "temporal_stability": 4.273,
+   "condition_match": 0.917,
+   "quality": 4.303
+  }
+ },
+ "winner": "pilot",
+ "rule": "max mean(photorealism, physical_plausibility, condition_intensity) subject to condition_match >= pilot - 0.1 and temporal_stability >= pilot - 0.5; pilot wins ties",
+ "judge": "Cosmos-Reason1-7B, blind, automated",
+ "note": "re-merged 18:45 with the lenient parser (72/75 parsed vs 49/75); the sweep judge process started 40 s before the parser fix. Winner unchanged."
+}

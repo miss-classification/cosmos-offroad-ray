@@ -1,0 +1,22 @@
+{
+ "prep_hash": "22e56bf757951d6b",
+ "catalog": "/mnt/cluster_storage/cosmos-offroad/data/prepared/22e56bf757951d6b/catalog",
+ "wall_s": 26.88,
+ "rows": 9,
+ "ok": 9,
+ "status_counts": {
+  "ok": 9
+ },
+ "cache_hits": 0,
+ "hosts": {
+  "g-2455dd4517c900001.us-central1-a.c.dogfood-clouds.internal": 2,
+  "g-b74828448faea0001.us-central1-a.c.dogfood-clouds.internal": 1,
+  "g-59ca10901aefb0001.us-central1-c.c.dogfood-clouds.internal": 1,
+  "g-157025f92e42e0001.us-central1-c.c.dogfood-clouds.internal": 1,
+  "g-80739b33a9ab20001.us-central1-c.c.dogfood-clouds.internal": 1,
+  "g-f5bb07a0874e80001.us-central1-c.c.dogfood-clouds.internal": 1,
+  "g-bc46201fd5eb70001.us-central1-a.c.dogfood-clouds.internal": 1,
+  "g-837868d4c5f1e0001.us-central1-c.c.dogfood-clouds.internal": 1
+ },
+ "prep_seconds_sum": 139.167
+}

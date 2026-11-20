@@ -1,0 +1,86 @@
+# v3: additional real-world conditions that matter for off-road perception and autonomy.
+# Chosen because each is a documented failure mode for camera-based off-road driving
+# (visibility loss, glare, low light, surface appearance change, seasonal domain shift),
+# and each is physically plausible on the same terrain without moving the trail.
+# Every prompt ends with the same structural anchor used in v2.
+conditions:
+- name: dust_brownout
+  prompt: >-
+    A thick cloud of tan dust kicked up by a vehicle driving ahead on a dry off-road trail, filmed by a
+    forward-facing camera mounted on an all-terrain vehicle. Fine brown dust hangs in the air and
+    swirls in the wind, sunlight scatters through it, distant trees and hills are hidden behind a
+    beige haze, and a thin layer of dust coats the grass and rocks near the trail. Visibility is under
+    twenty meters. The trail layout, ruts, rocks and vegetation keep their exact shape and position,
+    and the camera motion is unchanged. Realistic dashcam video, natural film grain.
+- name: golden_hour_glare
+  prompt: >-
+    Late afternoon golden hour on an off-road trail, filmed by a forward-facing camera mounted on an
+    all-terrain vehicle driving toward a low sun just above the horizon. Warm orange sunlight rakes
+    across the ground and throws long shadows from every rock and tuft of grass, the sky glows amber,
+    and bright sun glare and a soft lens flare wash out part of the image. The trail layout, ruts,
+    rocks and vegetation keep their exact shape and position, and the camera motion is unchanged.
+    Realistic dashcam video with natural lens flare.
+- name: blue_hour_dusk
+  prompt: >-
+    Blue hour just after sunset on an off-road trail, filmed by a forward-facing camera mounted on an
+    all-terrain vehicle. The sky is deep blue with a fading pink glow at the horizon, the landscape is
+    dim and cool-toned, details in the grass and trees are disappearing into shadow, and the vehicle's
+    headlights have just switched on, casting a warm white pool of light on the trail ahead. The trail
+    layout, ruts, rocks and vegetation keep their exact shape and position, and the camera motion is
+    unchanged. Realistic low-light dashcam video with sensor noise.
+- name: blizzard_whiteout
+  prompt: >-
+    A blizzard on an off-road trail, filmed by a forward-facing camera mounted on an all-terrain
+    vehicle. Heavy snow is falling fast and blowing sideways in strong wind, large snowflakes streak
+    past the lens, the ground, grass and bushes are buried under deep fresh snow, and the distance
+    disappears into a flat white-gray whiteout with no visible horizon. Only the nearest part of the
+    trail is readable as two faint tire tracks. The trail layout, ruts, rocks and vegetation keep their
+    exact shape and position, and the camera motion is unchanged. Realistic dashcam video.
+- name: wildfire_smoke
+  prompt: >-
+    Wildfire smoke over an off-road trail, filmed by a forward-facing camera mounted on an all-terrain
+    vehicle. The sky is a thick orange-brown haze, the sun is a dim red disk, everything is tinted
+    amber and sepia, distant hills fade into smoke, and fine gray ash drifts through the air and
+    settles on the ground. The light is eerie, dim and flat. The trail layout, ruts, rocks and
+    vegetation keep their exact shape and position, and the camera motion is unchanged. Realistic
+    dashcam video, natural film grain.
+- name: autumn
+  prompt: >-
+    Peak autumn on an off-road trail, filmed by a forward-facing camera mounted on an all-terrain
+    vehicle on a crisp sunny day. The trees and bushes have turned bright orange, red and yellow, the
+    grass is dry and golden, and fallen leaves are scattered across the dirt trail and gathered in
+    the ruts. The sky is clear pale blue and the sunlight is soft and low. The trail layout, ruts,
+    rocks and vegetation keep their exact shape and position, and the camera motion is unchanged.
+    Realistic dashcam video, natural film grain.
+- name: flooded_mud
+  prompt: >-
+    An off-road trail just after a heavy storm, filmed by a forward-facing camera mounted on an
+    all-terrain vehicle. The ruts are filled with brown standing water, the trail is deep, glossy,
+    churned mud with tire tracks pressed into it, splashes of mud cover the rocks and grass edges,
+    and the clouds are breaking up with patches of sunlight reflecting off the wet surfaces. The trail
+    layout, ruts, rocks and vegetation keep their exact shape and position, and the camera motion is
+    unchanged. Realistic dashcam video, natural film grain.
+- name: frost_dawn
+  prompt: >-
+    A freezing clear dawn on an off-road trail, filmed by a forward-facing camera mounted on an
+    all-terrain vehicle. White hoarfrost coats every blade of grass, leaf and rock, a low layer of
+    ground mist hangs over the fields, the first pink and gold sunlight touches the tops of the trees,
+    and the shadows are cold blue. The trail is frozen hard dirt with frost along its edges. The trail
+    layout, ruts, rocks and vegetation keep their exact shape and position, and the camera motion is
+    unchanged. Realistic dashcam video, natural film grain.
+- name: night_rain
+  prompt: >-
+    Driving through heavy rain at night on an off-road trail, filmed by a forward-facing camera mounted
+    on an all-terrain vehicle. The only light is the vehicle's headlights; rain streaks glow white in
+    the beams, raindrops sparkle in the light, the muddy trail and puddles shine with bright specular
+    reflections of the headlights, and everything beyond the beams is pitch black. The trail layout,
+    ruts, rocks and vegetation keep their exact shape and position, and the camera motion is
+    unchanged. Realistic low-light dashcam video with sensor noise.
+- name: drought_summer
+  prompt: >-
+    A hot, dry midsummer drought on an off-road trail, filmed by a forward-facing camera mounted on an
+    all-terrain vehicle at midday. The grass is parched straw-yellow and brown, bushes are dusty and
+    sparse, the dirt trail is pale, cracked and powdery, heat shimmer rises from the ground in the
+    distance, and the sky is a hazy, bleached blue with harsh overhead sun and short shadows. The trail
+    layout, ruts, rocks and vegetation keep their exact shape and position, and the camera motion is
+    unchanged. Realistic dashcam video, natural film grain.

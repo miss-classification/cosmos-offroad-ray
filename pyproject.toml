@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "offroad-ray"
+version = "0.1.0"
+description = "Off-road video augmentation with Ray Data, Ray Core and NVIDIA Cosmos Transfer 2.5"
+requires-python = ">=3.13,<3.14"
+license = {text = "Apache-2.0"}
+authors = [{name = "Alicia Chua"}]
+# Orchestration-side dependencies. These run in the Anyscale (Ray) Python
+# environment via a Ray runtime_env, NOT in the isolated Cosmos environment.
+# ray itself is provided by the Anyscale base image (2.60.0) and is not pinned here.
+dependencies = [
+  "boto3==1.29.7",
+  "numpy==2.2.6",
+  "opencv-python-headless==4.12.0.88",
+  "pandas==2.3.3",
+  "pyarrow==23.0.1",
+  "pydantic==2.12.3",
+  "pyyaml==6.0.3",
+  "pillow==11.3.0",
+  "jinja2==3.1.6",
+  "matplotlib==3.10.8",
+  "nvidia-ml-py==13.580.82",
+]
+
+[project.optional-dependencies]
+test = ["pytest==8.4.2"]
+
+[project.scripts]
+offroad-ray = "offroad_ray.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/offroad_ray"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = [
+  "gpu: requires the Ray cluster with GPUs and the Cosmos environment (deselect with -m 'not gpu')",
+]
+addopts = "-m 'not gpu'"

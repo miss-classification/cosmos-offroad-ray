@@ -1,0 +1,35 @@
+# v2 prompts for the realism sweep: stronger, more physical descriptions of each condition.
+# Each keeps the structural anchor sentence so the trail layout and camera motion are preserved.
+conditions:
+- name: fog
+  prompt: >-
+    Thick morning fog on an off-road trail, filmed by a forward-facing camera mounted on an all-terrain
+    vehicle. Visibility is about thirty meters: the trail is clear in the foreground, then fades into a
+    dense, soft white wall of fog. Trees and hillsides in the distance are only faint gray silhouettes or
+    completely hidden. The light is flat and diffuse with no shadows, colors are desaturated, and tiny
+    water droplets hang in the air. The dirt trail, ruts, rocks and vegetation keep their exact shape and
+    position, and the camera motion is unchanged. Realistic dashcam video, natural film grain.
+- name: rain
+  prompt: >-
+    A heavy rainstorm on an off-road trail, filmed by a forward-facing camera mounted on an all-terrain
+    vehicle. Rain streaks fall through the frame, the sky is dark gray with low storm clouds, and the
+    whole scene is dim and wet. The dirt trail has turned to dark, glossy mud with standing puddles in the
+    ruts that reflect the sky and ripple with raindrops. Grass, leaves and rocks are soaked and shiny.
+    The trail layout, ruts, rocks and vegetation keep their exact shape and position, and the camera
+    motion is unchanged. Realistic dashcam video, natural film grain.
+- name: night
+  prompt: >-
+    Pitch-black night on an off-road trail, filmed by a forward-facing camera mounted on an all-terrain
+    vehicle. There is no moon and no sky light. The only illumination is the vehicle's bright white LED
+    headlights, which light up the trail and nearby grass in front of the vehicle with strong falloff,
+    hard shadows behind rocks, and dark surroundings that fade to black within twenty meters. Trees
+    are dark shapes against a black sky. The trail layout, ruts, rocks and vegetation keep their exact
+    shape and position, and the camera motion is unchanged. Realistic low-light dashcam video with sensor noise.
+- name: snow
+  prompt: >-
+    Deep winter snow on an off-road trail, filmed by a forward-facing camera mounted on an all-terrain
+    vehicle. Twenty centimeters of fresh white snow blanket the ground, the grass, the bushes and the
+    rocks, and snow weighs down the branches of the trees. The trail is two packed snow tire tracks.
+    Light snowflakes drift through the air, the sky is a bright, even white overcast, and the scene is
+    cold and blue-white. The trail layout, ruts, rocks and vegetation keep their exact shape and position,
+    and the camera motion is unchanged. Realistic dashcam video, natural film grain.

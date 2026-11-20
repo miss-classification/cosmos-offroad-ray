@@ -1,0 +1,330 @@
+{
+ "wall_s": 82.751549243927,
+ "new_bytes": 13390786560,
+ "runs": [
+  {
+   "run_id": "meadows_2023-09-14-12-07-28",
+   "camera": "image_left_color",
+   "tar": {
+    "run_id": "meadows_2023-09-14-12-07-28",
+    "key": "kitti/all_topics/meadows_2023-09-14-12-07-28/image_left_color.tar",
+    "bucket": "tartandrive2",
+    "endpoint": "https://airlab-cloud.andrew.cmu.edu:8080/swift/v1/AUTH_ac8533a83cff4d48bc8c608ad222d330",
+    "bytes": 635381760,
+    "etag": "c0ede540a85a121d6648c9c4fd22e63f-38",
+    "last_modified": "2025-11-22 20:33:21+00:00",
+    "sha256": "ea8a02ff080b42050d7c8887c13ebd87e5e067fb507e2749e69c6265877e96ca",
+    "downloaded_at": "2026-11-18T20:43:23Z",
+    "seconds": 8.62,
+    "host": "g-80739b33a9ab20001.us-central1-c.c.dogfood-clouds.internal",
+    "skipped": false
+   },
+   "small_files": {
+    "data_extraction.log": 437535
+   },
+   "extract": {
+    "tar": "/mnt/cluster_storage/cosmos-offroad/data/tartandrive2/raw/meadows_2023-09-14-12-07-28/image_left_color.tar",
+    "members": 507,
+    "files_sample": [
+     "000000.png",
+     "000001.png",
+     "000002.png",
+     "000003.png",
+     "000004.png"
+    ],
+    "num_png": 506
+   },
+   "download_s": 11.66,
+   "extract_s": 25.66,
+   "host": "g-80739b33a9ab20001.us-central1-c.c.dogfood-clouds.internal"
+  },
+  {
+   "run_id": "slag_heap_2023-09-14-12-23-05",
+   "camera": "image_left_color",
+   "tar": {
+    "run_id": "slag_heap_2023-09-14-12-23-05",
+    "key": "kitti/all_topics/slag_heap_2023-09-14-12-23-05/image_left_color.tar",
+    "bucket": "tartandrive2",
+    "endpoint": "https://airlab-cloud.andrew.cmu.edu:8080/swift/v1/AUTH_ac8533a83cff4d48bc8c608ad222d330",
+    "bytes": 2109962240,
+    "etag": "cf103924f8bca41d0ea3a0654d8cdcfb-126",
+    "last_modified": "2025-11-22 20:57:07+00:00",
+    "sha256": "b1583cf02d16cd9349a6c58874e9704b65916e04c30c17f31bb0bea062707083",
+    "downloaded_at": "2026-11-18T20:43:41Z",
+    "seconds": 21.0,
+    "host": "g-157025f92e42e0001.us-central1-c.c.dogfood-clouds.internal",
+    "skipped": false
+   },
+   "small_files": {
+    "data_extraction.log": 461921
+   },
+   "extract": {
+    "tar": "/mnt/cluster_storage/cosmos-offroad/data/tartandrive2/raw/slag_heap_2023-09-14-12-23-05/image_left_color.tar",
+    "members": 1712,
+    "files_sample": [
+     "000000.png",
+     "000001.png",
+     "000002.png",
+     "000003.png",
+     "000004.png"
+    ],
+    "num_png": 1711
+   },
+   "download_s": 29.65,
+   "extract_s": 38.63,
+   "host": "g-157025f92e42e0001.us-central1-c.c.dogfood-clouds.internal"
+  },
+  {
+   "run_id": "turnpike_2023-09-12-12-39-19",
+   "camera": "image_left_color",
+   "tar": {
+    "run_id": "turnpike_2023-09-12-12-39-19",
+    "key": "kitti/all_topics/turnpike_2023-09-12-12-39-19/image_left_color.tar",
+    "bucket": "tartandrive2",
+    "endpoint": "https://airlab-cloud.andrew.cmu.edu:8080/swift/v1/AUTH_ac8533a83cff4d48bc8c608ad222d330",
+    "bytes": 1731092480,
+    "etag": "955914e881a031de6651b38e96c33db9-104",
+    "last_modified": "2025-11-22 21:03:30+00:00",
+    "sha256": "1b0b89714ce134d2ed3d8b14c145c13abe76927d2cdce49f55db3c85e1592398",
+    "downloaded_at": "2026-11-18T20:43:34Z",
+    "seconds": 14.37,
+    "host": "g-157025f92e42e0001.us-central1-c.c.dogfood-clouds.internal",
+    "skipped": false
+   },
+   "small_files": {
+    "data_extraction.log": 1763291
+   },
+   "extract": {
+    "tar": "/mnt/cluster_storage/cosmos-offroad/data/tartandrive2/raw/turnpike_2023-09-12-12-39-19/image_left_color.tar",
+    "members": 1765,
+    "files_sample": [
+     "000000.png",
+     "000001.png",
+     "000002.png",
+     "000003.png",
+     "000004.png"
+    ],
+    "num_png": 1764
+   },
+   "download_s": 23.05,
+   "extract_s": 41.23,
+   "host": "g-157025f92e42e0001.us-central1-c.c.dogfood-clouds.internal"
+  },
+  {
+   "run_id": "2023-11-02-16-00-43_down_meadows",
+   "camera": "image_left_color",
+   "tar": {
+    "run_id": "2023-11-02-16-00-43_down_meadows",
+    "key": "kitti/all_topics/2023-11-02-16-00-43_down_meadows/image_left_color.tar",
+    "bucket": "tartandrive2",
+    "endpoint": "https://airlab-cloud.andrew.cmu.edu:8080/swift/v1/AUTH_ac8533a83cff4d48bc8c608ad222d330",
+    "bytes": 2406860800,
+    "etag": "a872458a80510ab6397ac907ac6697a8-144",
+    "last_modified": "2025-11-21 22:07:48+00:00",
+    "sha256": "1febd4265e106d02fe0bbc075f15f570d0e4f056c1889beb37e6e6c2092d08c7",
+    "downloaded_at": "2026-11-18T20:43:44Z",
+    "seconds": 22.85,
+    "host": "g-80739b33a9ab20001.us-central1-c.c.dogfood-clouds.internal",
+    "skipped": false
+   },
+   "small_files": {
+    "data_extraction.log": 662324
+   },
+   "extract": {
+    "tar": "/mnt/cluster_storage/cosmos-offroad/data/tartandrive2/raw/2023-11-02-16-00-43_down_meadows/image_left_color.tar",
+    "members": 2156,
+    "files_sample": [
+     "000000.png",
+     "000001.png",
+     "000002.png",
+     "000003.png",
+     "000004.png"
+    ],
+    "num_png": 2155
+   },
+   "download_s": 32.45,
+   "extract_s": 46.76,
+   "host": "g-80739b33a9ab20001.us-central1-c.c.dogfood-clouds.internal"
+  },
+  {
+   "run_id": "gupta_warehouse_2023-09-13-19-12-49",
+   "camera": "image_left_color",
+   "tar": {
+    "run_id": "gupta_warehouse_2023-09-13-19-12-49",
+    "key": "kitti/all_topics/gupta_warehouse_2023-09-13-19-12-49/image_left_color.tar",
+    "bucket": "tartandrive2",
+    "endpoint": "https://airlab-cloud.andrew.cmu.edu:8080/swift/v1/AUTH_ac8533a83cff4d48bc8c608ad222d330",
+    "bytes": 631080960,
+    "etag": "895295b7be13f784bc840ef1ee092796-38",
+    "last_modified": "2025-11-22 20:31:07+00:00",
+    "sha256": "d58c24b25cb8dce6ae897bb4565ef449505a14908b574309be7899a2dda82567",
+    "downloaded_at": "2026-11-18T20:43:23Z",
+    "seconds": 8.45,
+    "host": "g-157025f92e42e0001.us-central1-c.c.dogfood-clouds.internal",
+    "skipped": false
+   },
+   "small_files": {
+    "data_extraction.log": 380517
+   },
+   "extract": {
+    "tar": "/mnt/cluster_storage/cosmos-offroad/data/tartandrive2/raw/gupta_warehouse_2023-09-13-19-12-49/image_left_color.tar",
+    "members": 832,
+    "files_sample": [
+     "000000.png",
+     "000001.png",
+     "000002.png",
+     "000003.png",
+     "000004.png"
+    ],
+    "num_png": 831
+   },
+   "download_s": 12.28,
+   "extract_s": 29.48,
+   "host": "g-157025f92e42e0001.us-central1-c.c.dogfood-clouds.internal"
+  },
+  {
+   "run_id": "sam_loop_2023-09-27-13-04-54",
+   "camera": "image_left_color",
+   "tar": {
+    "run_id": "sam_loop_2023-09-27-13-04-54",
+    "key": "kitti/all_topics/sam_loop_2023-09-27-13-04-54/image_left_color.tar",
+    "bucket": "tartandrive2",
+    "endpoint": "https://airlab-cloud.andrew.cmu.edu:8080/swift/v1/AUTH_ac8533a83cff4d48bc8c608ad222d330",
+    "bytes": 1480304640,
+    "etag": "c9f147e69703f0f7e2edadeacc26513c-89",
+    "last_modified": "2025-11-22 20:50:38+00:00",
+    "sha256": "46f7fdae51773bc41ca00695f67e44151ea1929cef92de8476e0657f63e7bec2",
+    "downloaded_at": "2026-11-18T20:43:35Z",
+    "seconds": 15.47,
+    "host": "g-80739b33a9ab20001.us-central1-c.c.dogfood-clouds.internal",
+    "skipped": false
+   },
+   "small_files": {
+    "data_extraction.log": 307655
+   },
+   "extract": {
+    "tar": "/mnt/cluster_storage/cosmos-offroad/data/tartandrive2/raw/sam_loop_2023-09-27-13-04-54/image_left_color.tar",
+    "members": 1253,
+    "files_sample": [
+     "000000.png",
+     "000001.png",
+     "000002.png",
+     "000003.png",
+     "000004.png"
+    ],
+    "num_png": 1252
+   },
+   "download_s": 23.3,
+   "extract_s": 32.2,
+   "host": "g-80739b33a9ab20001.us-central1-c.c.dogfood-clouds.internal"
+  },
+  {
+   "run_id": "turnpike_flat_2023-09-12-13-08-55",
+   "camera": "image_left_color",
+   "tar": {
+    "run_id": "turnpike_flat_2023-09-12-13-08-55",
+    "key": "kitti/all_topics/turnpike_flat_2023-09-12-13-08-55/image_left_color.tar",
+    "bucket": "tartandrive2",
+    "endpoint": "https://airlab-cloud.andrew.cmu.edu:8080/swift/v1/AUTH_ac8533a83cff4d48bc8c608ad222d330",
+    "bytes": 665610240,
+    "etag": "9c68319c805fdcba8146da715c9e8ab9-40",
+    "last_modified": "2025-11-22 21:39:09+00:00",
+    "sha256": "16ec31ac935b3d7fafeece9098d559a84b02bbd28c0d64ce5fde8828d4ce1844",
+    "downloaded_at": "2026-11-18T20:43:22Z",
+    "seconds": 6.82,
+    "host": "g-80739b33a9ab20001.us-central1-c.c.dogfood-clouds.internal",
+    "skipped": false
+   },
+   "small_files": {
+    "data_extraction.log": 401996
+   },
+   "extract": {
+    "tar": "/mnt/cluster_storage/cosmos-offroad/data/tartandrive2/raw/turnpike_flat_2023-09-12-13-08-55/image_left_color.tar",
+    "members": 669,
+    "files_sample": [
+     "000000.png",
+     "000001.png",
+     "000002.png",
+     "000003.png",
+     "000004.png"
+    ],
+    "num_png": 668
+   },
+   "download_s": 10.57,
+   "extract_s": 29.01,
+   "host": "g-80739b33a9ab20001.us-central1-c.c.dogfood-clouds.internal"
+  },
+  {
+   "run_id": "2023-11-14-14-26-22_gupta",
+   "camera": "image_left_color",
+   "tar": {
+    "run_id": "2023-11-14-14-26-22_gupta",
+    "key": "kitti/all_topics/2023-11-14-14-26-22_gupta/image_left_color.tar",
+    "bucket": "tartandrive2",
+    "endpoint": "https://airlab-cloud.andrew.cmu.edu:8080/swift/v1/AUTH_ac8533a83cff4d48bc8c608ad222d330",
+    "bytes": 1797611520,
+    "etag": "1284890f98ee7e5e57ff0274293e8dd7-108",
+    "last_modified": "2025-11-21 22:10:52+00:00",
+    "sha256": "db070f83e59ba881c2ef1102b7f6cba276d264ce88a0cc4ab1eb436b5f22b920",
+    "downloaded_at": "2026-11-18T20:43:37Z",
+    "seconds": 17.38,
+    "host": "g-80739b33a9ab20001.us-central1-c.c.dogfood-clouds.internal",
+    "skipped": false
+   },
+   "small_files": {
+    "data_extraction.log": 539492
+   },
+   "extract": {
+    "tar": "/mnt/cluster_storage/cosmos-offroad/data/tartandrive2/raw/2023-11-14-14-26-22_gupta/image_left_color.tar",
+    "members": 1704,
+    "files_sample": [
+     "000000.png",
+     "000001.png",
+     "000002.png",
+     "000003.png",
+     "000004.png"
+    ],
+    "num_png": 1703
+   },
+   "download_s": 25.8,
+   "extract_s": 40.83,
+   "host": "g-80739b33a9ab20001.us-central1-c.c.dogfood-clouds.internal"
+  },
+  {
+   "run_id": "figure_8_morning_slow_2023-09-12-11-06-32",
+   "camera": "image_left_color",
+   "tar": {
+    "run_id": "figure_8_morning_slow_2023-09-12-11-06-32",
+    "key": "kitti/all_topics/figure_8_morning_slow_2023-09-12-11-06-32/image_left_color.tar",
+    "bucket": "tartandrive2",
+    "endpoint": "https://airlab-cloud.andrew.cmu.edu:8080/swift/v1/AUTH_ac8533a83cff4d48bc8c608ad222d330",
+    "bytes": 1932881920,
+    "etag": "234ce447777056390689e3cdd1e0cdb9-116",
+    "last_modified": "2025-11-22 20:13:48+00:00",
+    "sha256": "0213f822ad2bed0d91b3da992e68c3a10a1cb07a0e64c238a25eedb154cf9fe4",
+    "downloaded_at": "2026-11-18T20:43:39Z",
+    "seconds": 19.58,
+    "host": "g-80739b33a9ab20001.us-central1-c.c.dogfood-clouds.internal",
+    "skipped": false
+   },
+   "small_files": {
+    "data_extraction.log": 749087
+   },
+   "extract": {
+    "tar": "/mnt/cluster_storage/cosmos-offroad/data/tartandrive2/raw/figure_8_morning_slow_2023-09-12-11-06-32/image_left_color.tar",
+    "members": 1808,
+    "files_sample": [
+     "000000.png",
+     "000001.png",
+     "000002.png",
+     "000003.png",
+     "000004.png"
+    ],
+    "num_png": 1807
+   },
+   "download_s": 27.82,
+   "extract_s": 42.08,
+   "host": "g-80739b33a9ab20001.us-central1-c.c.dogfood-clouds.internal"
+  }
+ ]
+}

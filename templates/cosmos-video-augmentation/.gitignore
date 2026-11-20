@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+results/
+*.mp4
+!docs/images/*.mp4

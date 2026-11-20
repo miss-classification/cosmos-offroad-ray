@@ -1,0 +1,22 @@
+# Realism sweep setting b: edge threshold very_high (sparser edges than the default medium), control weight 0.6,
+# v2 prompts. Same 3 pilot clips and seed 101 as the pilot so outputs compare directly. Guardrails ON.
+name: realism_b
+dataset:
+  runs:
+    - meadows_2023-09-14-12-07-28
+    - slag_heap_2023-09-14-12-23-05
+    - turnpike_2023-09-12-12-39-19
+  max_download_gb: 10
+clips:
+  clips_per_run: 3
+max_clips: 3
+control:
+  preset_edge_threshold: very_high
+generation:
+  conditions_file: conditions_v2.yaml
+  seeds: [101]
+  control_weights: [0.6]
+scheduler:
+  num_actors: 8
+budget:
+  max_generation_attempts: 500

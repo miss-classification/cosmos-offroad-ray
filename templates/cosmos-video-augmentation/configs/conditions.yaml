@@ -1,0 +1,25 @@
+conditions:
+- name: fog
+  prompt: Dense fog. A forward-facing camera on an all-terrain vehicle drives along an unpaved off-road
+    trail. Thick white fog fills the air, distant trees and hills fade into a flat gray-white haze, colors
+    are muted and contrast is low, and the sky is uniformly overcast. The dirt trail, its ruts, rocks,
+    vegetation and terrain shape stay exactly where they are, and the camera motion is unchanged. Photorealistic
+    dashcam footage.
+- name: rain
+  prompt: Heavy rain. A forward-facing camera on an all-terrain vehicle drives along an unpaved off-road
+    trail during a downpour under dark storm clouds. The dirt is soaked and dark brown, puddles and wet
+    mud reflect the gray sky, leaves and rocks glisten with water, and the light is dim and diffuse. The
+    trail layout, ruts, rocks, vegetation and terrain shape stay exactly where they are, and the camera
+    motion is unchanged. Photorealistic dashcam footage.
+- name: night
+  prompt: Night. A forward-facing camera on an all-terrain vehicle drives along an unpaved off-road trail
+    in complete darkness. The sky is black, the only light comes from the vehicle headlights, which illuminate
+    the trail ahead in a warm cone while the surroundings fall off into deep shadow. The trail layout,
+    ruts, rocks, vegetation and terrain shape stay exactly where they are, and the camera motion is unchanged.
+    Photorealistic dashcam footage.
+- name: snow
+  prompt: Snow-covered landscape. A forward-facing camera on an all-terrain vehicle drives along an unpaved
+    off-road trail after a snowfall. A layer of white snow covers the ground, rocks and vegetation, the
+    trail shows through as compacted tracks, bare branches carry snow, and the sky is bright overcast
+    white. The trail layout, ruts, rocks, vegetation and terrain shape stay exactly where they are, and
+    the camera motion is unchanged. Photorealistic dashcam footage.

@@ -1,0 +1,24 @@
+# Anyscale Service: the interactive application on 8 GPU replicas.
+#   anyscale service deploy -f jobs/service.yaml
+#   anyscale service terminate -n cosmos-video-augmentation
+# Anyone with the URL can submit generation requests. Keep guardrails on and terminate after use.
+name: cosmos-video-augmentation
+containerfile: Dockerfile
+working_dir: .
+compute_config:
+  head_node:
+    instance_type: n2-standard-8          # AWS: m5.2xlarge
+  worker_nodes:
+    - instance_type: a2-ultragpu-1g       # AWS: p4de.24xlarge
+      min_nodes: 0
+      max_nodes: 8
+applications:
+  - name: paint
+    import_path: serve_app:app
+    route_prefix: /
+    runtime_env:
+      env_vars:
+        USE_GPUS: "1"
+        PAINT_REPLICAS: "8"
+        COSMOS_GUARDRAILS: "1"
+        COSMOS_SHARED: /mnt/user_storage/cosmos-video-augmentation

@@ -1,0 +1,19 @@
+# Phase B pilot: 3 source clips (3 runs) x 4 appearance conditions x 2 seeds = 24 requests.
+name: pilot
+dataset:
+  runs:
+    - meadows_2023-09-14-12-07-28
+    - slag_heap_2023-09-14-12-23-05
+    - turnpike_2023-09-12-12-39-19
+  max_download_gb: 10
+clips:
+  clips_per_run: 3
+max_clips: 3
+generation:
+  conditions_file: conditions.yaml
+  seeds: [101, 202]
+  control_weights: [1.0]
+scheduler:
+  num_actors: 8
+budget:
+  max_generation_attempts: 500

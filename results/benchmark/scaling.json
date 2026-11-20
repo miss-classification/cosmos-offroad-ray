@@ -1,0 +1,203 @@
+{
+ "config": "benchmark",
+ "note": "node_hours count every GPU worker node (8) for the run wall time, since the cluster keeps them allocated; no cost figures because pricing was not verified.",
+ "points": [
+  {
+   "active_fraction_of_node_hours": 0.1182,
+   "active_gpu_hours": 0.5433,
+   "actor_init_s": [
+    104.2
+   ],
+   "actor_replacements": 0,
+   "allocated_actor_gpu_hours": 0.5744,
+   "cold_start_s": 106.11,
+   "distinct_gpu_uuids": 1,
+   "distinct_hosts": 1,
+   "generation_window_s": 1958.07,
+   "infra_failures": 0,
+   "node_hours_gpu_group": 4.595,
+   "ns_dir": "/mnt/cluster_storage/cosmos-offroad/runs/benchmark/bench-20261118-142754-a1",
+   "num_actors": 1,
+   "peak_mem_gb_max": 70.96,
+   "per_request_child_s_median": 79.79,
+   "per_request_child_s_min_max": [
+    79.12,
+    96.42
+   ],
+   "requests": 24,
+   "requests_per_min_generation_window": 0.735,
+   "status_counts": {
+    "generated_unreviewed": 24
+   },
+   "wall_s": 2067.75
+  },
+  {
+   "active_fraction_of_node_hours": 0.2234,
+   "active_gpu_hours": 0.5499,
+   "actor_init_s": [
+    100.1,
+    105.2
+   ],
+   "actor_replacements": 0,
+   "allocated_actor_gpu_hours": 0.6155,
+   "cold_start_s": 106.52,
+   "distinct_gpu_uuids": 2,
+   "distinct_hosts": 2,
+   "generation_window_s": 999.04,
+   "infra_failures": 0,
+   "node_hours_gpu_group": 2.462,
+   "ns_dir": "/mnt/cluster_storage/cosmos-offroad/runs/benchmark/bench-20261118-142754-a2",
+   "num_actors": 2,
+   "peak_mem_gb_max": 70.96,
+   "per_request_child_s_median": 80.19,
+   "per_request_child_s_min_max": [
+    79.36,
+    96.62
+   ],
+   "requests": 24,
+   "requests_per_min_generation_window": 1.441,
+   "status_counts": {
+    "generated_unreviewed": 24
+   },
+   "wall_s": 1107.9
+  },
+  {
+   "active_fraction_of_node_hours": 0.4021,
+   "active_gpu_hours": 0.5584,
+   "actor_init_s": [
+    86.3,
+    102.5,
+    103.3,
+    103.9
+   ],
+   "actor_replacements": 0,
+   "allocated_actor_gpu_hours": 0.6944,
+   "cold_start_s": 105.2,
+   "distinct_gpu_uuids": 4,
+   "distinct_hosts": 4,
+   "generation_window_s": 522.19,
+   "infra_failures": 0,
+   "node_hours_gpu_group": 1.3888,
+   "ns_dir": "/mnt/cluster_storage/cosmos-offroad/runs/benchmark/bench-20261118-142754-a4",
+   "num_actors": 4,
+   "peak_mem_gb_max": 70.96,
+   "per_request_child_s_median": 80.26,
+   "per_request_child_s_min_max": [
+    79.12,
+    96.7
+   ],
+   "requests": 24,
+   "requests_per_min_generation_window": 2.758,
+   "status_counts": {
+    "generated_unreviewed": 24
+   },
+   "wall_s": 624.94
+  },
+  {
+   "active_fraction_of_node_hours": 0.6495,
+   "active_gpu_hours": 0.575,
+   "actor_init_s": [
+    85.0,
+    93.3,
+    102.6,
+    103.5,
+    103.5,
+    103.7,
+    104.6,
+    106.7
+   ],
+   "actor_replacements": 0,
+   "allocated_actor_gpu_hours": 0.8853,
+   "cold_start_s": 108.04,
+   "distinct_gpu_uuids": 8,
+   "distinct_hosts": 8,
+   "generation_window_s": 280.67,
+   "infra_failures": 0,
+   "node_hours_gpu_group": 0.8853,
+   "ns_dir": "/mnt/cluster_storage/cosmos-offroad/runs/benchmark/bench-20261118-142754-a8",
+   "num_actors": 8,
+   "peak_mem_gb_max": 70.96,
+   "per_request_child_s_median": 80.27,
+   "per_request_child_s_min_max": [
+    78.68,
+    98.24
+   ],
+   "requests": 24,
+   "requests_per_min_generation_window": 5.131,
+   "status_counts": {
+    "generated_unreviewed": 24
+   },
+   "wall_s": 398.39
+  }
+ ],
+ "request_ids": [
+  "dd1f73467e69f9b059a4",
+  "d35ef9558d528b82af69",
+  "1f3ed8f3bf6e61e50a5b",
+  "208996d3add74e3aaa34",
+  "9d476e7e18346df2b1c4",
+  "5e8e69bd5d279dd7d58d",
+  "ce43c82bc7f5e54db4a6",
+  "17e62c3f680886e1be43",
+  "4fb35477f2f2b5228cbb",
+  "a89fec6cd44fea05d183",
+  "3cbd0215639e8790b22f",
+  "e9aa266e0f9a595b4355",
+  "5909c6109db0bc0406ec",
+  "85abc4c721592de9088a",
+  "f1604572541a646e8972",
+  "9129b83a6d7eacf4b01b",
+  "20e7b5729bc804671bb9",
+  "da234406a4fa696b4d94",
+  "e99b10ccc1770b249aa4",
+  "94ad20395289e261d913",
+  "3e3619ba51762e51769d",
+  "3ae8120b6b61de4cc78d",
+  "f321acf1ab401bd4bdd0",
+  "27e79a3c849612ca91d0"
+ ],
+ "requests_per_point": 24,
+ "scaling": [
+  {
+   "cold_start_s": 106.11,
+   "efficiency_e2e": 1.0,
+   "efficiency_gen": 1.0,
+   "generation_window_s": 1958.07,
+   "num_actors": 1,
+   "speedup_e2e": 1.0,
+   "speedup_gen": 1.0,
+   "wall_s": 2067.75
+  },
+  {
+   "cold_start_s": 106.52,
+   "efficiency_e2e": 0.933,
+   "efficiency_gen": 0.98,
+   "generation_window_s": 999.04,
+   "num_actors": 2,
+   "speedup_e2e": 1.866,
+   "speedup_gen": 1.96,
+   "wall_s": 1107.9
+  },
+  {
+   "cold_start_s": 105.2,
+   "efficiency_e2e": 0.827,
+   "efficiency_gen": 0.937,
+   "generation_window_s": 522.19,
+   "num_actors": 4,
+   "speedup_e2e": 3.309,
+   "speedup_gen": 3.75,
+   "wall_s": 624.94
+  },
+  {
+   "cold_start_s": 108.04,
+   "efficiency_e2e": 0.649,
+   "efficiency_gen": 0.872,
+   "generation_window_s": 280.67,
+   "num_actors": 8,
+   "speedup_e2e": 5.19,
+   "speedup_gen": 6.976,
+   "wall_s": 398.39
+  }
+ ],
+ "stamp": "20261118-142754"
+}

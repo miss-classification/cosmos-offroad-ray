@@ -1,0 +1,20 @@
+# Quickstart: 1 drive, 1 clip, 2 conditions, 2 GPUs. About 15 minutes including model load.
+# Used by notebook 01 when USE_GPUS = True. Guardrails on.
+name: quickstart
+dataset:
+  runs:
+    - gupta_warehouse_2023-09-13-19-12-49
+  max_download_gb: 5
+clips:
+  clips_per_run: 1
+max_clips: 1
+generation:
+  conditions_file: conditions_v3.yaml
+  only_conditions: [golden_hour_glare, night_rain]
+  seeds: [101]
+  control_weights: [1.0]
+  guardrails: true
+scheduler:
+  num_actors: 2
+budget:
+  max_generation_attempts: 20

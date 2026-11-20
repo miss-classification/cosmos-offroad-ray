@@ -1,0 +1,29 @@
+# Environments and caches
+.venv/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+.wrangler/
+*.egg-info/
+
+# Large media: never in git (AGENTS.md hard rule). Full outputs live on cluster storage;
+# web media is published separately (Cloudflare Pages / template bundle).
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.gif
+*.webp
+*.zip
+*.tar
+*.tar.gz
+*.parquet
+results/showcase/
+docs/blog/replay/
+docs/blog/assets/
+
+# Credentials (none are in the tree; belt and braces)
+.env
+*.token
+token
+.cloudflare_token

@@ -1,0 +1,45 @@
+{
+ "seed": 101,
+ "stride": 8,
+ "v_min": 50,
+ "n_outputs": 96,
+ "n_sources": 24,
+ "by_condition": {
+  "fog": {
+   "hsv_s": 39.66,
+   "hsv_s_bright": 39.4,
+   "dark_frac": 0.01,
+   "v_mean": 136.37,
+   "lab_chroma": 7.57
+  },
+  "night": {
+   "hsv_s": 170.7,
+   "hsv_s_bright": 186.03,
+   "dark_frac": 0.65,
+   "v_mean": 48.16,
+   "lab_chroma": 15.44
+  },
+  "rain": {
+   "hsv_s": 83.9,
+   "hsv_s_bright": 78.85,
+   "dark_frac": 0.14,
+   "v_mean": 96.22,
+   "lab_chroma": 12.28
+  },
+  "snow": {
+   "hsv_s": 21.84,
+   "hsv_s_bright": 19.93,
+   "dark_frac": 0.04,
+   "v_mean": 141.82,
+   "lab_chroma": 3.87
+  },
+  "source": {
+   "hsv_s": 41.83,
+   "hsv_s_bright": 36.51,
+   "dark_frac": 0.13,
+   "v_mean": 122.5,
+   "lab_chroma": 8.47
+  }
+ },
+ "computed_at": "2026-11-19 15:37:24"
+}

@@ -1,0 +1,138 @@
+[
+ {
+  "host": "g-157025f92e42e0001.us-central1-c.c.dogfood-clouds.internal",
+  "ip": "10.3.0.32",
+  "cvd": "0",
+  "ray_gpu_ids": [
+   0
+  ],
+  "smi": "0, NVIDIA A100-SXM4-80GB, 81920 MiB, 580.178.04, GPU-0679675d-a1bb-6163-0ffa-87d74c1d7d77",
+  "cuda_ver": "CUDA Version: 13.0",
+  "nvcc": "Cuda compilation tools, release 13.0, V13.0.88",
+  "nproc": "1",
+  "mem": "167",
+  "df": "10.88.162.82:/vpn_cloud/workspaces/expwrk_4lika7qiu1pmem44jcnwqwd1ti/cluster_storage  2.5T  892G  1.5T  38% /mnt/cluster_storage\n/dev/nvme0n1                                                                          369G   11G  340G   3% /mnt/local_storage\noverlay                                                                               369G   11G  340G   3% /",
+  "cs_ls": "",
+  "ffmpeg": "2",
+  "py": "/tmp/ray/session_2026-11-18_11-33-52_762167_4575/runtime_resources/pip/4e39bdd7409096bf2e35b6e911020ceda80ac796/virtualenv/bin/python\nPython 3.13.18"
+ },
+ {
+  "host": "g-80739b33a9ab20001.us-central1-c.c.dogfood-clouds.internal",
+  "ip": "10.3.0.132",
+  "cvd": "0",
+  "ray_gpu_ids": [
+   0
+  ],
+  "smi": "0, NVIDIA A100-SXM4-80GB, 81920 MiB, 580.178.04, GPU-cbdabc04-7b56-1237-4bc0-42612f6f460a",
+  "cuda_ver": "CUDA Version: 13.0",
+  "nvcc": "Cuda compilation tools, release 13.0, V13.0.88",
+  "nproc": "1",
+  "mem": "167",
+  "df": "10.88.162.82:/vpn_cloud/workspaces/expwrk_4lika7qiu1pmem44jcnwqwd1ti/cluster_storage  2.5T  892G  1.5T  38% /mnt/cluster_storage\n/dev/nvme0n1                                                                          369G   11G  340G   3% /mnt/local_storage\noverlay                                                                               369G   11G  340G   3% /",
+  "cs_ls": "",
+  "ffmpeg": "2",
+  "py": "/tmp/ray/session_2026-11-18_11-33-52_762167_4575/runtime_resources/pip/4e39bdd7409096bf2e35b6e911020ceda80ac796/virtualenv/bin/python\nPython 3.13.18"
+ },
+ {
+  "host": "g-59ca10901aefb0001.us-central1-c.c.dogfood-clouds.internal",
+  "ip": "10.3.0.27",
+  "cvd": "0",
+  "ray_gpu_ids": [
+   0
+  ],
+  "smi": "0, NVIDIA A100-SXM4-80GB, 81920 MiB, 580.178.04, GPU-9d093e36-8247-c4fa-d0f9-a0ea43c8c1cc",
+  "cuda_ver": "CUDA Version: 13.0",
+  "nvcc": "Cuda compilation tools, release 13.0, V13.0.88",
+  "nproc": "1",
+  "mem": "167",
+  "df": "10.88.162.82:/vpn_cloud/workspaces/expwrk_4lika7qiu1pmem44jcnwqwd1ti/cluster_storage  2.5T  892G  1.5T  38% /mnt/cluster_storage\n/dev/nvme0n1                                                                          369G   11G  340G   3% /mnt/local_storage\noverlay                                                                               369G   11G  340G   3% /",
+  "cs_ls": "",
+  "ffmpeg": "2",
+  "py": "/tmp/ray/session_2026-11-18_11-33-52_762167_4575/runtime_resources/pip/4e39bdd7409096bf2e35b6e911020ceda80ac796/virtualenv/bin/python\nPython 3.13.18"
+ },
+ {
+  "host": "g-f5bb07a0874e80001.us-central1-c.c.dogfood-clouds.internal",
+  "ip": "10.3.0.37",
+  "cvd": "0",
+  "ray_gpu_ids": [
+   0
+  ],
+  "smi": "0, NVIDIA A100-SXM4-80GB, 81920 MiB, 580.178.04, GPU-ab25f6ec-3a40-05d9-09c9-11d41dc9decc",
+  "cuda_ver": "CUDA Version: 13.0",
+  "nvcc": "Cuda compilation tools, release 13.0, V13.0.88",
+  "nproc": "1",
+  "mem": "167",
+  "df": "10.88.162.82:/vpn_cloud/workspaces/expwrk_4lika7qiu1pmem44jcnwqwd1ti/cluster_storage  2.5T  892G  1.5T  38% /mnt/cluster_storage\n/dev/nvme0n1                                                                          369G   11G  340G   3% /mnt/local_storage\noverlay                                                                               369G   11G  340G   3% /",
+  "cs_ls": "",
+  "ffmpeg": "2",
+  "py": "/tmp/ray/session_2026-11-18_11-33-52_762167_4575/runtime_resources/pip/4e39bdd7409096bf2e35b6e911020ceda80ac796/virtualenv/bin/python\nPython 3.13.18"
+ },
+ {
+  "host": "g-bc46201fd5eb70001.us-central1-a.c.dogfood-clouds.internal",
+  "ip": "10.3.0.30",
+  "cvd": "0",
+  "ray_gpu_ids": [
+   0
+  ],
+  "smi": "0, NVIDIA A100-SXM4-80GB, 81920 MiB, 580.178.04, GPU-63190a2d-acec-c104-238f-f2d9a983d2bd",
+  "cuda_ver": "CUDA Version: 13.0",
+  "nvcc": "Cuda compilation tools, release 13.0, V13.0.88",
+  "nproc": "1",
+  "mem": "167",
+  "df": "10.88.162.82:/vpn_cloud/workspaces/expwrk_4lika7qiu1pmem44jcnwqwd1ti/cluster_storage  2.5T  892G  1.5T  38% /mnt/cluster_storage\n/dev/nvme0n1                                                                          369G   11G  340G   3% /mnt/local_storage\noverlay                                                                               369G   11G  340G   3% /",
+  "cs_ls": "",
+  "ffmpeg": "2",
+  "py": "/tmp/ray/session_2026-11-18_11-33-52_762167_4575/runtime_resources/pip/4e39bdd7409096bf2e35b6e911020ceda80ac796/virtualenv/bin/python\nPython 3.13.18"
+ },
+ {
+  "host": "g-837868d4c5f1e0001.us-central1-c.c.dogfood-clouds.internal",
+  "ip": "10.3.0.138",
+  "cvd": "0",
+  "ray_gpu_ids": [
+   0
+  ],
+  "smi": "0, NVIDIA A100-SXM4-80GB, 81920 MiB, 580.178.04, GPU-cc2def37-6878-2af2-ed8e-125d248e2fa4",
+  "cuda_ver": "CUDA Version: 13.0",
+  "nvcc": "Cuda compilation tools, release 13.0, V13.0.88",
+  "nproc": "1",
+  "mem": "167",
+  "df": "10.88.162.82:/vpn_cloud/workspaces/expwrk_4lika7qiu1pmem44jcnwqwd1ti/cluster_storage  2.5T  892G  1.5T  38% /mnt/cluster_storage\n/dev/nvme0n1                                                                          369G   11G  340G   3% /mnt/local_storage\noverlay                                                                               369G   11G  340G   3% /",
+  "cs_ls": "",
+  "ffmpeg": "2",
+  "py": "/tmp/ray/session_2026-11-18_11-33-52_762167_4575/runtime_resources/pip/4e39bdd7409096bf2e35b6e911020ceda80ac796/virtualenv/bin/python\nPython 3.13.18"
+ },
+ {
+  "host": "g-b74828448faea0001.us-central1-a.c.dogfood-clouds.internal",
+  "ip": "10.3.0.64",
+  "cvd": "0",
+  "ray_gpu_ids": [
+   0
+  ],
+  "smi": "0, NVIDIA A100-SXM4-80GB, 81920 MiB, 580.178.04, GPU-f81f74b5-b2a6-e01e-03b9-e62b234a94b5",
+  "cuda_ver": "CUDA Version: 13.0",
+  "nvcc": "Cuda compilation tools, release 13.0, V13.0.88",
+  "nproc": "1",
+  "mem": "167",
+  "df": "10.88.162.82:/vpn_cloud/workspaces/expwrk_4lika7qiu1pmem44jcnwqwd1ti/cluster_storage  2.5T  892G  1.5T  38% /mnt/cluster_storage\n/dev/nvme0n1                                                                          369G   11G  340G   3% /mnt/local_storage\noverlay                                                                               369G   11G  340G   3% /",
+  "cs_ls": "",
+  "ffmpeg": "2",
+  "py": "/tmp/ray/session_2026-11-18_11-33-52_762167_4575/runtime_resources/pip/4e39bdd7409096bf2e35b6e911020ceda80ac796/virtualenv/bin/python\nPython 3.13.18"
+ },
+ {
+  "host": "g-2455dd4517c900001.us-central1-a.c.dogfood-clouds.internal",
+  "ip": "10.3.0.133",
+  "cvd": "0",
+  "ray_gpu_ids": [
+   0
+  ],
+  "smi": "0, NVIDIA A100-SXM4-80GB, 81920 MiB, 580.178.04, GPU-29eb3786-cc42-3633-c529-0dd9849c3d2e",
+  "cuda_ver": "CUDA Version: 13.0",
+  "nvcc": "Cuda compilation tools, release 13.0, V13.0.88",
+  "nproc": "1",
+  "mem": "167",
+  "df": "10.88.162.82:/vpn_cloud/workspaces/expwrk_4lika7qiu1pmem44jcnwqwd1ti/cluster_storage  2.5T  892G  1.5T  38% /mnt/cluster_storage\n/dev/nvme0n1                                                                          369G   11G  340G   3% /mnt/local_storage\noverlay                                                                               369G   11G  340G   3% /",
+  "cs_ls": "",
+  "ffmpeg": "2",
+  "py": "/tmp/ray/session_2026-11-18_11-33-52_762167_4575/runtime_resources/pip/4e39bdd7409096bf2e35b6e911020ceda80ac796/virtualenv/bin/python\nPython 3.13.18"
+ }
+]

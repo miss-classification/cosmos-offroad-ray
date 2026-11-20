@@ -1,0 +1,92 @@
+{
+ "python": "3.13.17 (main, Oct 21 2026, 17:49:22) [Clang 23.1.3 ]",
+ "executable": "/mnt/cluster_storage/cosmos-offroad/envs/ct25-v1.5.4-45c6f0fb-cu130-py3.13/venv/bin/python",
+ "base_prefix": "/mnt/cluster_storage/cosmos-offroad/envs/ct25-v1.5.4-45c6f0fb-cu130-py3.13/python/cpython-3.13.17-linux-x86_64-gnu",
+ "cuda_visible_devices": "0",
+ "torch": "2.9.1+cu130",
+ "torch_cuda": "13.0",
+ "cudnn": 92101,
+ "gpu": {
+  "ok": true,
+  "seconds": 0.165,
+  "name": "NVIDIA A100-SXM4-80GB",
+  "capability": "8.0",
+  "total_gb": 85.09,
+  "uuid": "ab25f6ec-3a40-05d9-09c9-11d41dc9decc",
+  "arch_list": [
+   "sm_75",
+   "sm_80",
+   "sm_86",
+   "sm_90",
+   "sm_100",
+   "sm_120",
+   "compute_120"
+  ]
+ },
+ "cudnn_conv3d": {
+  "ok": true,
+  "seconds": 0.541,
+  "out_shape": [
+   1,
+   32,
+   9,
+   64,
+   64
+  ],
+  "max_abs_err_vs_fp32": 0.014989852905273438
+ },
+ "flash_attn": {
+  "ok": true,
+  "seconds": 3.772,
+  "version": "2.7.4.post1",
+  "max_abs_err_vs_sdpa": 0.0078125
+ },
+ "transformer_engine": {
+  "ok": true,
+  "seconds": 2.835,
+  "version": "2.8+cu130.torch29",
+  "out_shape": [
+   16,
+   128
+  ]
+ },
+ "natten": {
+  "ok": true,
+  "seconds": 1.711,
+  "version": "0.21.0"
+ },
+ "decord_real_clip": {
+  "ok": true,
+  "seconds": 0.467,
+  "version": "0.6.0",
+  "frames": 93,
+  "shape": [
+   93,
+   544,
+   1024,
+   3
+  ],
+  "fps": 16.0
+ },
+ "edge_control_parity": {
+  "ok": true,
+  "seconds": 54.764,
+  "model_input_thw": [
+   93,
+   704,
+   1280
+  ],
+  "aspect": "16,9",
+  "fps": 16,
+  "pixel_agreement": 1.0,
+  "ours_binary": true,
+  "upstream_edge_density": 0.15509259922180474,
+  "ours_edge_density": 0.15509259922180474
+ },
+ "all_ok": true,
+ "rc": 0,
+ "seconds": 70.9,
+ "host": "g-f5bb07a0874e80001.us-central1-c.c.dogfood-clouds.internal",
+ "stdout_tail": "[11-18 20:51:57|INFO|cosmos_transfer2/_src/transfer2/inference/utils.py:204:read_video_or_image_into_frames_BCTHW] Reading video from /mnt/cluster_storage/cosmos-offroad/data/prepared/f55bfa53d072457b/slag_heap_2023-09-14-12-23-05__image_left_color__t3.000__30b40b6f/input.mp4\n[11-18 20:51:57|INFO|cosmos_transfer2/_src/transfer2/inference/utils.py:243:read_video_or_image_into_frames_BCTHW] Loaded input tensor with shape (1, 3, 93, 544, 1024) value 0, 255\n[11-18 20:51:58|INFO|cosmos_transfer2/_src/transfer2/inference/utils.py:204:read_video_or_image_into_frames_BCTHW] Reading video from /mnt/cluster_storage/cosmos-offroad/data/prepared/f55bfa53d072457b/slag_heap_2023-09-14-12-23-05__image_left_color__t3.000__30b40b6f/control_edge.mp4\n[11-18 20:51:59|INFO|cosmos_transfer2/_src/transfer2/inference/utils.py:243:read_video_or_image_into_frames_BCTHW] Loaded input tensor with shape (1, 3, 93, 704, 1280) value 0, 255\n{\"python\": \"3.13.17 (main, Oct 21 2026, 17:49:22) [Clang 23.1.3 ]\", \"executable\": \"/mnt/cluster_storage/cosmos-offroad/envs/ct25-v1.5.4-45c6f0fb-cu130-py3.13/venv/bin/python\", \"base_prefix\": \"/mnt/cluster_storage/cosmos-offroad/envs/ct25-v1.5.4-45c6f0fb-cu130-py3.13/python/cpython-3.13.17-linux-x86_64-gnu\", \"cuda_visible_devices\": \"0\", \"torch\": \"2.9.1+cu130\", \"torch_cuda\": \"13.0\", \"cudnn\": 92101, \"gpu\": true, \"cudnn_conv3d\": true, \"flash_attn\": true, \"transformer_engine\": true, \"natten\": true, \"decord_real_clip\": true, \"edge_control_parity\": true, \"all_ok\": true}\n",
+ "stderr_tail": "/tmp/envcheck-9mu__9dh/env_check_worker.py:50: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.\nConsider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)\n  return {\"out_shape\": list(y.shape), \"max_abs_err_vs_fp32\": float((y.float() - ref).abs().max())}\n"
+}

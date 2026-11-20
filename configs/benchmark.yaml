@@ -1,0 +1,18 @@
+# Phase C strong scaling: the identical 24-request pilot workload, run with 1, 2, 4 and 8
+# actors into separate namespaces with resume disabled.
+name: benchmark
+dataset:
+  runs:
+    - meadows_2023-09-14-12-07-28
+    - slag_heap_2023-09-14-12-23-05
+    - turnpike_2023-09-12-12-39-19
+  max_download_gb: 10
+clips:
+  clips_per_run: 3
+max_clips: 3
+generation:
+  conditions_file: conditions.yaml
+  seeds: [101, 202]
+  control_weights: [1.0]
+budget:
+  max_generation_attempts: 500

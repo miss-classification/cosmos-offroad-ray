@@ -1,0 +1,32 @@
+{
+ "token_present": true,
+ "repos": {
+  "nvidia/Cosmos-Transfer2.5-2B": {
+   "ok": true,
+   "requested_revision": "bbaeedb2b57cc8b14a44653099e2551adb69dcc7",
+   "resolved_sha": "bbaeedb2b57cc8b14a44653099e2551adb69dcc7"
+  },
+  "nvidia/Cosmos-Reason1-7B": {
+   "ok": true,
+   "requested_revision": "3210bec0495fdc7a8d3dbb8d58da5711eab4b423",
+   "resolved_sha": "3210bec0495fdc7a8d3dbb8d58da5711eab4b423"
+  },
+  "nvidia/Cosmos-Predict2.5-2B": {
+   "ok": true,
+   "requested_revision": "f176dc95b4a70f53ce01c4b302851595e7322b00",
+   "resolved_sha": "f176dc95b4a70f53ce01c4b302851595e7322b00"
+  },
+  "nvidia/Cosmos-Guardrail1": {
+   "ok": true,
+   "requested_revision": "d6d4bfa899a71454a700907664f3e88f503950cf",
+   "resolved_sha": "d6d4bfa899a71454a700907664f3e88f503950cf"
+  },
+  "Qwen/Qwen3Guard-Gen-0.6B": {
+   "ok": true,
+   "requested_revision": null,
+   "resolved_sha": "fada3b2f655b89601929198343c94cd2f64d93cc"
+  }
+ },
+ "host": "g-f5bb07a0874e80001.us-central1-c.c.dogfood-clouds.internal",
+ "all_ok": true
+}

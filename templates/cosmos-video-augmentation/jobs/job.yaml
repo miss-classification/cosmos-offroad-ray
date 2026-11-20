@@ -1,0 +1,21 @@
+# Anyscale Job: the full 288-clip run (prepare, generate, score) on 8 A100 80 GB GPUs.
+#   anyscale job submit -f jobs/job.yaml
+#   anyscale job submit -f jobs/job.yaml -- python -m offroad_ray.cli generate configs/quickstart.yaml
+name: cosmos-video-augmentation
+containerfile: Dockerfile
+working_dir: .
+env_vars:
+  COSMOS_SHARED: /mnt/user_storage/cosmos-video-augmentation
+compute_config:
+  head_node:
+    instance_type: n2-standard-8          # AWS: m5.2xlarge
+  worker_nodes:
+    - instance_type: a2-ultragpu-1g       # 1x A100 80 GB. AWS: p4de.24xlarge (8x A100 80 GB, max_nodes: 1)
+      min_nodes: 0
+      max_nodes: 8
+entrypoint: >-
+  python -m offroad_ray.cli fetch configs/main.yaml &&
+  python -m offroad_ray.cli prepare configs/main.yaml &&
+  python -m offroad_ray.cli generate configs/main.yaml &&
+  python -m offroad_ray.cli review configs/main.yaml
+max_retries: 0

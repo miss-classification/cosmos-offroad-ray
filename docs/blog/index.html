@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Every Season on Every Trail</title>
+<meta name="description" content="Generate weather variations of real off-road video with NVIDIA Cosmos Transfer 2.5 on Ray: 288 clips on 8 A100s and a live Ray Serve application.">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #ffffff; --text: #1b1f24; --muted: #5d6673; --line: #e3e6ea; --soft: #f5f7f9; --accent: #c9761a;
+    --code-bg: #0f1419; --code-text: #e6e1cf; --callout: #fff7ec; --callout-line: #f2a541; --meta: #f3f5f8;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 17px/1.7 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
+  .wide { width: min(1100px, calc(100vw - 32px)); margin-left: 50%; transform: translateX(-50%); }
+  h1 { font-size: clamp(30px, 4.6vw, 44px); line-height: 1.12; letter-spacing: -0.02em; margin: 10px 0 18px; }
+  h2 { font-size: 27px; line-height: 1.25; margin: 56px 0 12px; letter-spacing: -0.01em; }
+  h3 { font-size: 20px; margin: 36px 0 8px; }
+  p { margin: 0 0 18px; }
+  a { color: var(--accent); }
+  .lede { font-size: 20px; line-height: 1.6; }
+  .byline { color: var(--muted); font-size: 15px; margin: -6px 0 22px; }
+  .kicker { color: var(--accent); font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+  figure { margin: 26px 0 30px; }
+  figure video, figure img { width: 100%; display: block; border-radius: 10px; background: #000; }
+  figcaption { color: var(--muted); font-size: 14px; line-height: 1.5; margin-top: 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 8px 0 6px; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 13px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+  td.num, th.num { text-align: right; }
+  .tablewrap { overflow-x: auto; margin-bottom: 18px; }
+  .note { color: var(--muted); font-size: 14px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 24px 0 28px; }
+  .stat { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 14px 14px 12px; }
+  .stat b { display: block; font-size: 28px; line-height: 1.1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .stat span { color: var(--muted); font-size: 13.5px; line-height: 1.35; display: block; margin-top: 4px; }
+  .code { margin: 18px 0 8px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+  .code .hd { display: flex; justify-content: space-between; gap: 10px; background: var(--soft); color: var(--muted);
+              font-size: 12.5px; padding: 7px 12px; border-bottom: 1px solid var(--line); }
+  .code .hd b { color: var(--text); font-weight: 600; }
+  pre { margin: 0; background: var(--code-bg); color: var(--code-text); padding: 14px 16px; overflow-x: auto;
+        font: 13.5px/1.55 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; }
+  pre .c { color: #7f8c98; } pre .k { color: #ffb454; } pre .s { color: #aad94c; }
+  code { font: 0.9em ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; background: var(--soft); padding: 1px 5px; border-radius: 4px; }
+  .callout { background: var(--callout); border-left: 4px solid var(--callout-line); border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 12px 0 22px; font-size: 16px; }
+  .embed { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #0d0f12; }
+  .embed iframe { width: 100%; height: 640px; border: 0; display: block; }
+  @media (max-width: 860px) { .embed iframe { height: 1080px; } }
+  .embedbar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; padding: 8px 12px;
+              background: var(--soft); border-bottom: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  .embedbar button { background: transparent; border: 1px solid var(--line); color: var(--text); border-radius: 999px; padding: 3px 10px; font: inherit; font-size: 12.5px; cursor: pointer; }
+  .embedbar button.on { background: var(--accent); border-color: var(--accent); color: #1a1205; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .two { grid-template-columns: 1fr; } }
+  .meta { background: var(--meta); border: 1px dashed var(--line); border-radius: 12px; padding: 14px 16px; font-size: 14px; line-height: 1.5; margin-bottom: 30px; }
+  .meta dl { display: grid; grid-template-columns: 170px 1fr; gap: 6px 14px; margin: 8px 0 0; }
+  .meta dt { color: var(--muted); }
+  .meta dd { margin: 0; }
+  .meta summary { cursor: pointer; font-weight: 600; }
+  @media (max-width: 560px) { .meta dl { grid-template-columns: 1fr; } }
+  ul.tight { margin: 0 0 18px; padding-left: 22px; } ul.tight li { margin: 4px 0; }
+  ol.refs { padding-left: 24px; font-size: 14.5px; line-height: 1.55; } ol.refs li { margin: 0 0 10px; }
+  sup a { text-decoration: none; font-size: 0.8em; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 48px 0; }
+</style>
+</head>
+<body>
+<main>
+
+<details class="meta">
+  <summary>Blog metadata (draft, for the CMS)</summary>
+  <dl>
+    <dt>Blog image</dt><dd><code>assets/four_worlds_poster.jpg</code> (alt: <code>assets/hero_poster.jpg</code>)</dd>
+    <dt>Publish date &amp; time</dt><dd>TBD</dd>
+    <dt>Author(s)</dt><dd>Alicia Chua, Alexandr Plashchinsky, Nickhil Gupta, Abhishek Sriram, Abhishek Monangi, Omar Shorbaji</dd>
+    <dt>Blog type</dt><dd>Product</dd>
+    <dt>Eng reviewer</dt><dd>TBD</dd>
+    <dt>Target keywords</dt><dd>Ray, Anyscale, Ray Serve, Ray Data, multi GPU, video generation, world foundation models, NVIDIA Cosmos, Cosmos Transfer 2.5, synthetic data, off-road autonomy, data augmentation, batch inference, model multiplexing</dd>
+    <dt>Related resources</dt><dd>https://docs.ray.io/en/latest/serve/model-multiplexing.html<br>https://docs.ray.io/en/latest/data/data.html<br>https://docs.ray.io/en/latest/ray-core/actors.html</dd>
+    <dt>SEO description</dt><dd>Generate weather variations of real off-road video with NVIDIA Cosmos Transfer 2.5 on Ray: 288 clips on 8 A100s and a live Ray Serve application. (145 characters)</dd>
+    <dt>Blog URL</dt><dd>/every-season-every-trail-ray-cosmos-transfer</dd>
+  </dl>
+</details>
+
+<div class="kicker">Ray Data · Ray Core · Ray Serve · NVIDIA Cosmos</div>
+<h1>Every Season on Every Trail: Scaling Off-Road Video Augmentation with Ray and NVIDIA Cosmos Transfer 2.5</h1>
+<p class="byline">By Alicia Chua, Alexandr Plashchinsky, Nickhil Gupta, Abhishek Sriram, Abhishek Monangi and Omar Shorbaji</p>
+
+<p class="lede">Off-road perception models need examples of night rain, snow and smoke, yet these conditions are scarce in recorded driving data. We used <a href="https://github.com/nvidia-cosmos/cosmos-transfer2.5" target="_blank" rel="noopener">NVIDIA Cosmos Transfer 2.5</a> <sup><a href="#ref2">[2]</a></sup> to generate new weather and lighting for real ATV footage from <a href="https://theairlab.org/TartanDrive2" target="_blank" rel="noopener">TartanDrive 2.0</a> <sup><a href="#ref1">[1]</a></sup>, a public off-road driving dataset from the AirLab at Carnegie Mellon University, preserving the terrain, vehicle motion and camera path of each recording. On 8 NVIDIA A100 GPUs, <a href="https://www.ray.io" target="_blank" rel="noopener">Ray</a> <sup><a href="#ref6">[6]</a></sup> generated 288 variants in 51.5 minutes, and every request succeeded on its first attempt.</p>
+
+<figure class="wide">
+  <video src="assets/hero_one_drive.mp4" poster="assets/hero_poster.jpg" autoplay muted loop playsinline></video>
+  <figcaption>A real 5.8-second recording followed by Cosmos Transfer 2.5 outputs for golden hour, night rain, autumn, blue hour, blizzard and rain. Every output is generated from the same camera clip and its edge map.</figcaption>
+</figure>
+
+<p>The workflow runs on a single Ray cluster. <a href="https://docs.ray.io/en/latest/data/data.html" target="_blank" rel="noopener">Ray Data</a> prepares clips and scores outputs, persistent <a href="https://docs.ray.io/en/latest/ray-core/actors.html" target="_blank" rel="noopener">Ray actors</a> keep the 2B-parameter model loaded on each GPU, a scheduler built on <code>ray.wait</code> handles retries and resumption, and <a href="https://docs.ray.io/en/latest/serve/index.html" target="_blank" rel="noopener">Ray Serve</a> exposes the same actors through an interactive application in which users select a drive, describe a condition and watch 8 GPUs generate results in parallel. The template includes a replay of stored results that runs without GPUs; generating new clips requires GPU resources.</p>
+
+<div class="stats">
+  <div class="stat"><b>288 / 288</b><span>clips succeeded on the first attempt, 0 out-of-memory errors</span></div>
+  <div class="stat"><b>51.5 min</b><span>for the full run on 8 A100s (6.45 GPU-hours of work)</span></div>
+  <div class="stat"><b>6.98x</b><span>generation speedup on 8 GPUs vs 1 (87% efficiency)</span></div>
+  <div class="stat"><b>100.9 s</b><span>to generate 8 drives in the live Ray Serve application</span></div>
+</div>
+
+<h2>Interactive demo</h2>
+<p>Select a drive and a condition. The player replays outputs from the batch pipeline at the model's native 1024&times;544 resolution, with the original footage to the left of the divider and the generated version to the right. Select "All 9 drives" to view the same prompt applied to every scene.</p>
+
+<div class="wide embed">
+  <div class="embedbar"><span>Interactive replay: stored outputs, no GPU needed</span><span><a href="replay/" target="_blank" rel="noopener">open full screen</a></span></div>
+  <iframe src="replay/" title="Paint the Trail interactive replay" loading="lazy"></iframe>
+</div>
+
+<h3>The live application</h3>
+<p>The replay reproduces a live Ray Serve application. In the recording below, a new user selects a drive, chooses golden hour and submits the request to all 8 GPUs. The page reports the progress of each GPU during generation and then displays the results with a comparison slider.</p>
+<figure class="wide">
+  <video src="assets/clickthrough.mp4" autoplay muted loop playsinline controls></video>
+  <figcaption>Screen recording of the live application on Ray Serve with safety guardrails enabled. The generation period is shown at 12x speed. All 8 clips completed 100.9 seconds after submission.</figcaption>
+</figure>
+
+<h2>Motivation</h2>
+<p>Autonomous ground vehicles operating off-road encounter conditions that their training data rarely covers. Collecting footage of a night rainstorm on a specific trail requires waiting for the weather, deploying a crew in it and labeling the new data. Simulators provide control, but they rarely reproduce the appearance of real terrain such as wet grass and loose gravel.</p>
+<p>World foundation models provide an alternative <sup><a href="#ref4">[4]</a></sup>. Cosmos Transfer 2.5 <sup><a href="#ref2">[2]</a></sup> takes a real video, a control signal derived from it and a text prompt, and generates a new video that follows the control. We use the edge map of every frame as the control. Because the edges come from the real recording, the generated clip keeps the trail's layout and the vehicle's motion, while the prompt sets the light, weather, season and surface.</p>
+
+<figure class="wide">
+  <video src="assets/four_worlds.mp4" poster="assets/four_worlds_poster.jpg" autoplay muted loop playsinline></video>
+  <figcaption>Golden hour, night rain, autumn and blizzard, generated from the same recording and edge map.</figcaption>
+</figure>
+
+<h2>Generation pipeline</h2>
+<ul class="tight">
+  <li><b>Input.</b> 93 frames (5.8 seconds) from the ATV's front camera, resampled from 10 Hz to the model's 16 fps by repeating the nearest frame without interpolation.</li>
+  <li><b>Control.</b> Canny edges computed once per clip at the model's working resolution and stored losslessly, so every condition and seed reuses the same control video.</li>
+  <li><b>Generation.</b> The distilled edge model runs 4 denoising steps and writes a 1024&times;544 video.</li>
+  <li><b>Guardrails.</b> The Cosmos safety guardrails <sup><a href="#ref4">[4]</a></sup>: a text check before generation (keyword blocklist and Qwen3Guard <sup><a href="#ref5">[5]</a></sup>) and a video check after it (Cosmos-Guardrail1). All results in this post were generated with both checks enabled.</li>
+  <li><b>Validation.</b> Each output is probed for frame count, size and frame rate before it is recorded as done.</li>
+</ul>
+
+<h3>Dataset: TartanDrive 2.0</h3>
+<div class="tablewrap"><table>
+  <tr><th>Item</th><th>Value</th></tr>
+  <tr><td>Source</td><td><a href="https://theairlab.org/TartanDrive2" target="_blank" rel="noopener">TartanDrive 2.0</a> <sup><a href="#ref1">[1]</a></sup>, AirLab, Carnegie Mellon University; CC BY 4.0; ATV front camera (<code>image_left_color</code>)</td></tr>
+  <tr><td>Drives</td><td>9 recorded runs</td></tr>
+  <tr><td>Clips</td><td>27 prepared (3 per drive); 24 used in the main run, 9 showcase scenes for the extra conditions</td></tr>
+  <tr><td>Download</td><td>13.39 GB in 82.75 s</td></tr>
+  <tr><td>Clip format</td><td>93 frames, 1024&times;544, 16 fps</td></tr>
+</table></div>
+
+<h2>Results</h2>
+
+<h3>Scaling</h3>
+<p>We ran the same 24 requests on 1, 2, 4 and 8 actors, each with a dedicated A100, in fresh namespaces with no resume. The median request took 79.79 seconds on a single actor and 80.27 seconds with eight running concurrently, so parallel actors do not slow individual requests.</p>
+<div class="tablewrap"><table>
+  <tr><th class="num">Actors</th><th class="num">Wall time</th><th class="num">Speedup, generation</th><th class="num">Speedup, end to end</th><th class="num">Median per request</th></tr>
+  <tr><td class="num">1</td><td class="num">2067.75 s</td><td class="num">1.00x</td><td class="num">1.00x</td><td class="num">79.79 s</td></tr>
+  <tr><td class="num">2</td><td class="num">1107.90 s</td><td class="num">1.96x</td><td class="num">1.87x</td><td class="num">80.19 s</td></tr>
+  <tr><td class="num">4</td><td class="num">624.94 s</td><td class="num">3.75x</td><td class="num">3.31x</td><td class="num">80.26 s</td></tr>
+  <tr><td class="num">8</td><td class="num">398.39 s</td><td class="num">6.98x</td><td class="num">5.19x</td><td class="num">80.27 s</td></tr>
+</table></div>
+<p class="note">End-to-end speedup includes a fixed cold start of about 106 seconds per actor (loading the model), spread over only 3 requests per actor in the 8-actor case. On longer runs this cost becomes small: the main run below spent 88 seconds before its first dispatch and 51.5 minutes generating.</p>
+<figure>
+  <img src="assets/scaling.png" alt="Speedup and parallel efficiency for 1, 2, 4 and 8 actors">
+  <figcaption>Speedup relative to a single actor (left) and parallel efficiency (right). The generation window excludes the model cold start.</figcaption>
+</figure>
+<figure>
+  <img src="assets/timeline_a8.png" alt="Timeline of 8 actors each loading the model then generating 3 requests back to back">
+  <figcaption>Every actor loads the model once, then processes its requests back to back with no idle gaps.</figcaption>
+</figure>
+
+<h3>The main run</h3>
+<p>The main run combined 24 clips with 4 conditions (fog, rain, night, snow) and 3 seeds: 288 requests on 8 A100s. All 288 succeeded on the first attempt in 3089.64 seconds, with no out-of-memory errors, no infrastructure failures and no replacement actors. Executed sequentially, the same work would require 23,219 seconds of GPU time.</p>
+
+<h3>Time per request</h3>
+<p>The denoising steps account for 79% of each request, so throughput scales primarily with the number of GPUs working in parallel.</p>
+<div class="tablewrap"><table>
+  <tr><th>Stage (median of 288)</th><th class="num">Seconds</th><th class="num">Share</th></tr>
+  <tr><td>Denoising, 4 steps</td><td class="num">63.57</td><td class="num">79.1%</td></tr>
+  <tr><td>Video guardrail</td><td class="num">5.03</td><td class="num">6.3%</td></tr>
+  <tr><td>Writing output and control videos</td><td class="num">4.85</td><td class="num">6.0%</td></tr>
+  <tr><td>Decode and postprocessing</td><td class="num">4.03</td><td class="num">5.0%</td></tr>
+  <tr><td>Preprocessing</td><td class="num">1.18</td><td class="num">1.5%</td></tr>
+  <tr><td>Text guardrail</td><td class="num">0.64</td><td class="num">0.8%</td></tr>
+  <tr><td><b>Total per request</b></td><td class="num"><b>80.32</b></td><td class="num">100%</td></tr>
+</table></div>
+
+<h3>Consistency across drives</h3>
+<p>Because the scene structure comes from each recording, the same prompt produces results that follow the layout of every drive. Night rain received the highest automated review score among the additional conditions.</p>
+<figure class="wide">
+  <video src="assets/nine_drives_night_rain.mp4" autoplay muted loop playsinline></video>
+  <figcaption>The night rain prompt applied to all nine showcase drives. Headlight falloff, wet ground and rain streaks follow each trail's own layout.</figcaption>
+</figure>
+<div class="two">
+  <figure><video src="assets/wipe_fb9d3bafac_autumn.mp4" autoplay muted loop playsinline></video><figcaption>Autumn on a rocky trail under trees.</figcaption></figure>
+  <figure><video src="assets/wipe_6e36465c49_blue_hour_dusk.mp4" autoplay muted loop playsinline></video><figcaption>Blue hour on a wet gravel road.</figcaption></figure>
+</div>
+
+<h3>Automated quality metrics</h3>
+<p>We scored every output with a Ray Data pass on CPU. Edge F1 compares the edges of each output with those of the source clip within 2 pixels and measures how much of the original structure is preserved. Fog scores lowest, as expected, because fog obscures distant edges.</p>
+<div class="tablewrap"><table>
+  <tr><th>Condition (72 outputs each)</th><th class="num">Edge F1 vs source</th><th class="num">Change in brightness</th></tr>
+  <tr><td>Snow</td><td class="num">0.820</td><td class="num">+17.3</td></tr>
+  <tr><td>Rain</td><td class="num">0.779</td><td class="num">&minus;33.9</td></tr>
+  <tr><td>Night</td><td class="num">0.640</td><td class="num">&minus;82.4</td></tr>
+  <tr><td>Fog</td><td class="num">0.529</td><td class="num">+7.8</td></tr>
+</table></div>
+<p>HSV saturation overstates color on dark frames because it is normalized by brightness: night outputs measure 170.7 against 41.8 for the source footage. CIELAB chroma, which is independent of brightness, shows a smaller increase from 8.47 to 15.44. The automated vision-language judge (<a href="https://huggingface.co/nvidia/Cosmos-Reason1-7B" target="_blank" rel="noopener">Cosmos-Reason1-7B</a> <sup><a href="#ref3">[3]</a></sup>, blind to the requested condition) proved to be weak evidence, labeling 64 of 71 rain clips as "overcast", so its scores were used only to rank showcase candidates. Human review of the outputs is planned.</p>
+
+<h3>Failure cases</h3>
+<figure>
+  <video src="assets/failure_wildfire_smoke.mp4" autoplay muted loop playsinline></video>
+  <figcaption>The lowest-scoring of 371 judged outputs: wildfire smoke on a winding gravel path. The sun disc dissolves and smoke puffs appear and vanish between frames.</figcaption>
+</figure>
+<p>Our automatic checks flagged 6 of the 288 main-run outputs, all for frozen frames and all from the same source clip, where the vehicle barely moves. That clip already repeats frames, because the camera's 10 Hz recording is stretched to 16 fps, so the flags identify clips for manual review.</p>
+
+<h2>System design on Ray</h2>
+<p>Clip preparation, model hosting, GPU scheduling, quality scoring and interactive serving each present a distinct scaling problem. Each maps to a Ray abstraction, and all of them run on the same cluster of 8 nodes with an A100 GPU on each.</p>
+
+<h3>Ray Data: clip preparation</h3>
+<p>Clip preparation decodes the raw camera frames, checks timestamps, resamples to 16 fps, encodes the model input, verifies it by decoding it back and computes the edge control. A Ray Data pipeline distributes the work with a single clip per block across the GPU nodes' CPUs, so the GPUs stay free for generation:</p>
+<div class="code"><div class="hd"><b>Ray Data · Clip preparation</b><span>Python · excerpt</span></div>
+<pre>ds = (ray.data.from_items(runs, override_num_blocks=len(runs))
+      .flat_map(plan_clips, num_cpus=1, resources=WORKER_ONLY)       <span class="c"># choose clip windows per drive</span>
+      .repartition(target_num_rows_per_block=1)                      <span class="c"># one clip per block</span>
+      .map(prepare_clip, num_cpus=2, resources=WORKER_ONLY,          <span class="c"># decode, resample, edges, verify</span>
+           compute=ray.data.TaskPoolStrategy(size=concurrency)))
+ds.write_parquet(catalog_dir)                                         <span class="c"># the prepared clip catalog</span></pre></div>
+<div class="callout"><b>The Ray advantage:</b> preparing 9 clips from scratch took 24.06 seconds of wall time for 129.49 seconds of per-clip work. Each clip writes into a directory keyed by a hash of its settings, so a rerun over all 27 clips with the same settings finished in 7.28 seconds.</div>
+
+<h3>Ray Core: persistent model actors</h3>
+<p>Cosmos Transfer 2.5 pins its own PyTorch and CUDA stack, which differs from the driver's environment. Each generation worker is a Ray actor that starts a long-lived child process under the Cosmos interpreter and talks to it over a pipe. The model loads once per actor, in 52 to 57 seconds, and then serves every request sent to that GPU:</p>
+<div class="code"><div class="hd"><b>Ray Core · Persistent GPU actor</b><span>Python · excerpt</span></div>
+<pre><span class="k">class</span> CosmosActor:                               <span class="c"># created with ray.remote(CosmosActor), one GPU each</span>
+    <span class="k">def</span> _start_child(self):
+        rfd, wfd = os.pipe()                      <span class="c"># replies come back on a dedicated pipe</span>
+        self.proc = subprocess.Popen(
+            [self.s[<span class="s">"cosmos_python"</span>], <span class="s">"-m"</span>, <span class="s">"offroad_ray.inference.subprocess_worker"</span>],
+            stdin=subprocess.PIPE, env=self._child_env(), pass_fds=(wfd,))
+
+    <span class="k">def</span> generate(self, req: dict) -> dict:     <span class="c"># model stays loaded between calls</span>
+        ...</pre></div>
+<div class="callout"><b>The Ray advantage:</b> the actor owns the GPU, the child process and its logs. If the child dies, the actor reports it and the scheduler replaces the actor on a healthy node, and the Cosmos dependencies remain isolated from the driver.</div>
+
+<h3>Scheduling with <code>ray.wait</code></h3>
+<p>Generation requests vary little in cost, so the scheduler keeps a single request in flight per actor and dispatches the next request as soon as an actor becomes free. It retries infrastructure failures on a replacement actor, never retries a guardrail block, validates every output and writes a record per request, so an interrupted run resumes from the last completed request:</p>
+<div class="code"><div class="hd"><b>Ray Core · Dispatch loop</b><span>Python · simplified</span></div>
+<pre><span class="k">while</span> pending <span class="k">or</span> in_flight:
+    done, _ = ray.wait(list(in_flight), num_returns=<span class="s">1</span>, timeout=<span class="s">5.0</span>)
+    <span class="k">for</span> ref <span class="k">in</span> done:
+        i, req, t0 = in_flight.pop(ref)
+        record(req, ray.get(ref))                 <span class="c"># validate with ffprobe, write the record</span>
+        free.append(i)
+    <span class="k">while</span> free <span class="k">and</span> pending:                    <span class="c"># refill idle GPUs immediately</span>
+        i, req = free.popleft(), pending.popleft()
+        in_flight[actors[i].generate.remote(req)] = (i, req, time.time())</pre></div>
+<div class="callout"><b>The Ray advantage:</b> because requests are dispatched individually from a shared queue, a GPU never waits on another. In the main run each of the 8 actors served exactly 36 requests and was busy for 2905 to 2957 of the 3090 seconds.</div>
+
+<h3>Ray Data: quality scoring</h3>
+<p>The quality pass reads every output, computes edge agreement, brightness, contrast, color and temporal metrics, and aggregates them per condition. It ran on all 288 outputs in 60.12 seconds and also builds side-by-side review images for a static review page:</p>
+<div class="code"><div class="hd"><b>Ray Data · Quality metrics</b><span>Python · simplified</span></div>
+<pre>ds = ray.data.from_items(rows, override_num_blocks=len(rows))
+metrics = ds.map(compute_output_metrics, num_cpus=<span class="s">2</span>, resources=WORKER_ONLY,
+                 compute=ray.data.TaskPoolStrategy(size=<span class="s">32</span>))
+metrics.write_parquet(metrics_dir)
+summary = ray.data.read_parquet(metrics_dir).groupby(<span class="s">"condition"</span>).aggregate(
+    Count(), Mean(<span class="s">"edge_f1"</span>), Std(<span class="s">"edge_f1"</span>), Mean(<span class="s">"delta_luma"</span>), ...).to_pandas()</pre></div>
+
+<h3>Ray Serve: the interactive application</h3>
+<p>The live application reuses the same actor class inside a Serve deployment. Each GPU replica processes a single request at a time. A CPU front end built on FastAPI serves the page, queues jobs and lets the browser poll for progress, so a request that takes 80 seconds never holds a connection open. Scene IDs act as <a href="https://docs.ray.io/en/latest/serve/model-multiplexing.html" target="_blank" rel="noopener">multiplexed model IDs</a>, which sends repeat requests for a drive to a replica that has already encoded it:</p>
+<div class="code"><div class="hd"><b>Ray Serve · GPU tier and scene affinity</b><span>Python · excerpt</span></div>
+<pre>@serve.deployment(max_ongoing_requests=<span class="s">1</span>, ray_actor_options={<span class="s">"num_gpus"</span>: <span class="s">1</span>, <span class="s">"num_cpus"</span>: <span class="s">4</span>})
+<span class="k">class</span> Painter:
+    <span class="k">def</span> __init__(self, settings):
+        self.engine = CosmosActor(idx, settings)      <span class="c"># same engine as the batch pipeline</span>
+
+    @serve.multiplexed(max_num_models_per_replica=<span class="s">12</span>)
+    <span class="k">async def</span> _scene(self, scene_id): <span class="k">return</span> scene_id
+
+    <span class="k">async def</span> paint(self, req):
+        <span class="k">await</span> self._scene(serve.get_multiplexed_model_id())
+        <span class="k">return await</span> asyncio.to_thread(self.engine.generate, req)
+
+<span class="c"># In the FastAPI front end: route each job to a replica that already holds its scene</span>
+self.painter.options(multiplexed_model_id=job[<span class="s">"scene_id"</span>]).paint.remote(req)</pre></div>
+<div class="callout"><b>The Ray advantage:</b> Serve's model multiplexing also provides cache-affinity routing. The video encodes that depend only on the drive are cached on the GPU and reused bit for bit, and identical requests replay instantly from shared storage.</div>
+<p>With guardrails on, 8 replicas were ready 121 seconds after deployment. In the recorded session, 8 drives finished 100.9 seconds after the click, with each clip taking 97.9 to 100.5 seconds. Those were the first requests on each replica, and the guardrail models were still warming up: the video check took 13.56 seconds against a median of 5.03 seconds in the batch run.</p>
+
+<h3>Single-clip latency</h3>
+<p>We also evaluated ways to reduce the latency of an individual clip. Splitting a clip across GPUs with context parallelism was slower than a single GPU in both 2-node and 4-node configurations, because each node in this cluster has a single GPU and the split adds network traffic to every step. Generating at 480p was about 3 times faster, but this distilled model is trained for 720p and the output turned to blur. <code>torch.compile</code> shaved a few seconds per clip, after warm-up runs of up to three minutes. Depth control, an alternative conditioning method, needs the non-distilled model with 35 steps: 867.5 seconds per clip, 10.8 times the edge model. On this hardware, the more effective strategy is to process more clips in parallel, which Ray supports directly.</p>
+
+<h2>Limitations</h2>
+<ul class="tight">
+  <li><b>Vehicle motion is fixed.</b> Motion and camera path come from the real drive, so a blizzard clip drives at the speed of a summer day. Choosing slow source segments for harsh weather helps.</li>
+  <li><b>Edges carry texture.</b> Dense grass produces dense edges, and under heavy rain or snow prompts that texture can turn into white foam. Sparser edge maps followed the prompt better in a small sweep (condition match 0.92 against 0.42 in our automated review) and are the next setting to test.</li>
+  <li><b>Human review is pending.</b> All quality figures in this post are automated, and the automated judge is weak evidence.</li>
+  <li><b>Frame duplication.</b> The camera records at 10 Hz and the model expects 16 fps, so slow clips already contain repeated frames.</li>
+</ul>
+
+<h2>Cost</h2>
+<p>The batch work in this post, from the first smoke test through the ten extra conditions, used 3.32 hours of cluster time on 8 GPU nodes: 26.55 node-hours held and 17.40 node-hours of active generation. The main run alone held 6.87 node-hours.</p>
+
+<h2>Key takeaways</h2>
+<p>A world foundation model can turn a few hours of real off-road driving into the same trails at night, in rain, in smoke or in autumn, while the geometry of every frame stays true to the recording. The work is dominated by a fixed 4-step sampler on each clip, so throughput comes from running many clips at once: per-request time stayed flat from 1 to 8 GPUs, and 288 clips finished in under an hour without a failed request.</p>
+<p>Ray supplies the execution layer around the model: Ray Data for preparation and scoring, persistent actors that isolate the model's dependencies, a dispatch loop that keeps every GPU busy and resumes cleanly, and Ray Serve to put the same engine behind an interactive app.</p>
+
+<h2>Get started</h2>
+<p><a href="#">Open the template on Anyscale</a> (DRAFT: replace with the template link before publishing). It includes the batch pipeline, the quality pass, the Ray Serve application and the replay page shown above, which runs without GPUs. Enable GPU execution when you are ready to generate new clips.</p>
+
+<p><b>Acknowledgements.</b> We thank the TartanDrive 2.0 team at the AirLab, Carnegie Mellon University, for releasing their off-road driving dataset openly, and the NVIDIA Cosmos team for the Cosmos Transfer 2.5, Cosmos-Reason1 and Cosmos-Guardrail1 models and code.</p>
+
+<h2>References</h2>
+<ol class="refs">
+  <li id="ref1">M. Sivaprakasam, P. Maheshwari, M. Guaman Castro, S. Triest, M. Nye, S. Willits, A. Saba, W. Wang and S. Scherer. <i>TartanDrive 2.0: More Modalities and Better Infrastructure to Further Self-Supervised Learning Research in Off-Road Driving Tasks.</i> arXiv:2402.01913, 2024. <a href="https://arxiv.org/abs/2402.01913" target="_blank" rel="noopener">arxiv.org/abs/2402.01913</a>. Dataset: <a href="https://theairlab.org/TartanDrive2" target="_blank" rel="noopener">theairlab.org/TartanDrive2</a>.</li>
+  <li id="ref2">NVIDIA. <i>World Simulation with Video Foundation Models for Physical AI.</i> arXiv:2511.00062, 2025. <a href="https://arxiv.org/abs/2511.00062" target="_blank" rel="noopener">arxiv.org/abs/2511.00062</a>. Code: <a href="https://github.com/nvidia-cosmos/cosmos-transfer2.5" target="_blank" rel="noopener">github.com/nvidia-cosmos/cosmos-transfer2.5</a>. Model: <a href="https://huggingface.co/nvidia/Cosmos-Transfer2.5-2B" target="_blank" rel="noopener">huggingface.co/nvidia/Cosmos-Transfer2.5-2B</a>. Project page: <a href="https://research.nvidia.com/labs/dir/cosmos-transfer2.5/" target="_blank" rel="noopener">research.nvidia.com/labs/dir/cosmos-transfer2.5</a>.</li>
+  <li id="ref3">NVIDIA. <i>Cosmos-Reason1: From Physical Common Sense To Embodied Reasoning.</i> arXiv:2503.15558, 2025. <a href="https://arxiv.org/abs/2503.15558" target="_blank" rel="noopener">arxiv.org/abs/2503.15558</a>. Model: <a href="https://huggingface.co/nvidia/Cosmos-Reason1-7B" target="_blank" rel="noopener">huggingface.co/nvidia/Cosmos-Reason1-7B</a>.</li>
+  <li id="ref4">NVIDIA. <i>Cosmos World Foundation Model Platform for Physical AI.</i> arXiv:2501.03575, 2025. <a href="https://arxiv.org/abs/2501.03575" target="_blank" rel="noopener">arxiv.org/abs/2501.03575</a>. Guardrail model: <a href="https://huggingface.co/nvidia/Cosmos-Guardrail1" target="_blank" rel="noopener">huggingface.co/nvidia/Cosmos-Guardrail1</a>. Platform: <a href="https://www.nvidia.com/en-us/ai/cosmos/" target="_blank" rel="noopener">nvidia.com/en-us/ai/cosmos</a>.</li>
+  <li id="ref5">H. Zhao, C. Yuan, F. Huang, X. Hu, Y. Zhang, A. Yang, B. Yu, D. Liu, J. Zhou, J. Lin and others. <i>Qwen3Guard Technical Report.</i> arXiv:2510.14276, 2025. Model: <a href="https://huggingface.co/Qwen/Qwen3Guard-Gen-0.6B" target="_blank" rel="noopener">huggingface.co/Qwen/Qwen3Guard-Gen-0.6B</a>.</li>
+  <li id="ref6">P. Moritz, R. Nishihara, S. Wang, A. Tumanov, R. Liaw, E. Liang, M. Elibol, Z. Yang, W. Paul, M. I. Jordan and I. Stoica. <i>Ray: A Distributed Framework for Emerging AI Applications.</i> 13th USENIX Symposium on Operating Systems Design and Implementation (OSDI), 2018. <a href="https://arxiv.org/abs/1712.05889" target="_blank" rel="noopener">arxiv.org/abs/1712.05889</a>. Project: <a href="https://www.ray.io" target="_blank" rel="noopener">ray.io</a>, documentation: <a href="https://docs.ray.io" target="_blank" rel="noopener">docs.ray.io</a>, code: <a href="https://github.com/ray-project/ray" target="_blank" rel="noopener">github.com/ray-project/ray</a>.</li>
+  <li id="ref7">X. Zhai, B. Mustafa, A. Kolesnikov and L. Beyer. <i>Sigmoid Loss for Language Image Pre-Training.</i> arXiv:2303.15343, 2023. Model: <a href="https://huggingface.co/google/siglip-so400m-patch14-384" target="_blank" rel="noopener">huggingface.co/google/siglip-so400m-patch14-384</a> (loaded by the Cosmos guardrail stack).</li>
+</ol>
+
+<h2>Licenses and attribution</h2>
+<ul class="tight note">
+  <li><b>Driving footage:</b> TartanDrive 2.0, AirLab, Carnegie Mellon University, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>. Changes: frames were temporally resampled from 10 Hz to 16 fps, re-encoded, and used as conditioning for generated changes in appearance. All generated videos in this post are derived from this footage.</li>
+  <li><b>Models:</b> Cosmos-Transfer2.5-2B, Cosmos-Reason1-7B and Cosmos-Guardrail1 are governed by the <a href="https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license" target="_blank" rel="noopener">NVIDIA Open Model License</a>; Cosmos-Guardrail1 also lists the Llama 2 Community License as additional information. Qwen3Guard-Gen-0.6B and SigLIP are licensed under Apache 2.0.</li>
+  <li><b>Code:</b> Cosmos Transfer 2.5 and Ray are released under the Apache License 2.0.</li>
+  <li><b>Trademarks:</b> NVIDIA, Cosmos and A100 are trademarks of NVIDIA Corporation.</li>
+</ul>
+
+<h2>Get involved with Ray</h2>
+<p>To connect with the Ray community, join the Ray Slack or ask questions on the Discuss forum. To run this workload on managed Ray, get started with <a href="https://www.anyscale.com" target="_blank" rel="noopener">Anyscale</a>. To learn more about Ray, see <a href="https://www.ray.io" target="_blank" rel="noopener">ray.io</a> and <a href="https://docs.ray.io" target="_blank" rel="noopener">docs.ray.io</a>.</p>
+
+</main>
+</body>
+</html>
